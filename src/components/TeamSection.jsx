@@ -8,14 +8,14 @@ const TeamSection = () => {
       role: 'Lead Frontend & Blockchain Engineer',
       image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop',
       github: 'https://github.com/iZiaur',
-      linkedin: '#'
+      linkedin: 'https://www.linkedin.com/in/md-ziaur-rahman-01031228a/'
     },
     {
       name: 'Mishti Khanna',
       role: 'Backend Architecture & Research Lead',
       image: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&h=400&fit=crop',
       github: '#',
-      linkedin: '#'
+      linkedin: 'https://www.linkedin.com/in/mishti-khanna-8b2b7a32b/'
     }
   ];
 
