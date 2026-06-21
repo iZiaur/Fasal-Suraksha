@@ -138,6 +138,14 @@ button {
   transition: all var(--transition-base);
 }
 
+button.sidebar-nav-item {
+  background: transparent;
+  border: none;
+  width: 100%;
+  text-align: left;
+  font-family: inherit;
+}
+
 ul, ol {
   list-style: none;
 }
