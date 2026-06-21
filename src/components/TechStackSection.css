@@ -168,3 +168,219 @@
     transform: rotate(90deg);
   }
 }
+
+/* --- Interactive Simulator Styles --- */
+
+.architecture-title-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.simulate-btn {
+  background: var(--color-accent-green, #2b5c38);
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 30px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  box-shadow: 0 4px 12px rgba(43, 92, 56, 0.3);
+}
+
+.simulate-btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(43, 92, 56, 0.4);
+}
+
+.simulate-btn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.simulate-btn.simulating {
+  animation: pulse-button 1.5s infinite;
+}
+
+@keyframes pulse-button {
+  0% { box-shadow: 0 0 0 0 rgba(43, 92, 56, 0.4); }
+  70% { box-shadow: 0 0 0 10px rgba(43, 92, 56, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(43, 92, 56, 0); }
+}
+
+.arch-arrow {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.2rem;
+}
+
+.arrow-label {
+  font-size: 0.65rem;
+  color: #888;
+  white-space: nowrap;
+  position: absolute;
+  top: -1.2rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.arch-node {
+  transition: all 0.3s ease;
+}
+
+.arch-node.active-node {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  border-color: var(--color-accent-green, #2b5c38);
+}
+
+.arch-node.highlight.active-node {
+  box-shadow: 0 10px 20px rgba(229, 153, 52, 0.2);
+  border-color: #e59934;
+}
+
+.arch-node.final.active-node {
+  box-shadow: 0 10px 20px rgba(43, 92, 56, 0.3);
+}
+
+/* Console Window */
+.console-window {
+  margin-top: 3rem;
+  background: #111;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+  border: 1px solid rgba(0,0,0,0.1);
+  font-family: 'Fira Code', monospace;
+}
+
+.console-header {
+  background: #222;
+  padding: 0.5rem 1rem;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid #333;
+}
+
+.console-dots {
+  display: flex;
+  gap: 6px;
+  margin-right: 1rem;
+}
+
+.console-dots span {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+.console-dots span:nth-child(1) { background: #ff5f56; }
+.console-dots span:nth-child(2) { background: #ffbd2e; }
+.console-dots span:nth-child(3) { background: #27c93f; }
+
+.console-title {
+  color: #888;
+  font-size: 0.75rem;
+  font-family: sans-serif;
+}
+
+.console-body {
+  height: 160px;
+  padding: 1rem;
+  overflow-y: auto;
+  color: #eee;
+  font-size: 0.85rem;
+  line-height: 1.6;
+  text-align: left;
+}
+
+.console-empty {
+  color: #555;
+  font-style: italic;
+}
+
+.console-line {
+  margin-bottom: 0.25rem;
+  animation: fadeIn 0.3s ease forwards;
+  opacity: 0;
+}
+
+.success-text {
+  color: #27c93f;
+  font-weight: 600;
+}
+
+.error-text {
+  color: #ff5f56;
+}
+
+@keyframes fadeIn {
+  to { opacity: 1; }
+}
+
+/* Contract Hash Badge */
+.contract-hash-badge {
+  display: inline-flex;
+  align-items: center;
+  margin-top: 1.5rem;
+  padding: 0.6rem 1.2rem;
+  background: #fdfdfd;
+  border: 1px solid #eaeaea;
+  border-radius: 30px;
+  font-size: 0.85rem;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+}
+
+.badge-pulse {
+  width: 8px;
+  height: 8px;
+  background: #27c93f;
+  border-radius: 50%;
+  margin-right: 0.75rem;
+  position: relative;
+}
+
+.badge-pulse::after {
+  content: '';
+  position: absolute;
+  top: -4px;
+  left: -4px;
+  right: -4px;
+  bottom: -4px;
+  border: 2px solid #27c93f;
+  border-radius: 50%;
+  animation: pulse-ring 2s infinite;
+}
+
+@keyframes pulse-ring {
+  0% { transform: scale(0.5); opacity: 1; }
+  100% { transform: scale(1.5); opacity: 0; }
+}
+
+.hash-label {
+  color: #666;
+  margin-right: 0.5rem;
+}
+
+.hash-link {
+  color: #8247E5; /* Polygon Purple */
+  font-weight: 600;
+  text-decoration: none;
+  font-family: monospace;
+}
+
+.hash-link:hover {
+  text-decoration: underline;
+}
