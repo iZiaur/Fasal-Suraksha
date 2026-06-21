@@ -167,7 +167,7 @@ const CTAFooter = () => {
           <div className="footer-col">
             <h4 className="footer-col-title">Team Drishti</h4>
             <nav className="footer-links">
-              <a href="https://devpost.com/software/fasal-suraksha" target="_blank" rel="noopener noreferrer">Devpost Submission</a>
+
               <a href="https://github.com/iZiaur/Fasal-Suraksha" target="_blank" rel="noopener noreferrer">GitHub Repository</a>
               <a href="#team">Team Profiles</a>
               <a href="#tech-stack">Tech Stack</a>
@@ -201,7 +201,7 @@ const CTAFooter = () => {
         <div className="footer-bottom">
           <div className="footer-bottom-inner">
             <span className="footer-copyright">
-              Built with ❤️ by Team Drishti for the Build for Good Hackathon.
+              Built by Team Drishti for the Build for Good Hackathon.
             </span>
 
             <div className="footer-bottom-links">
