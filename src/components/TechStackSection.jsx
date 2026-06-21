@@ -22,7 +22,7 @@ const TechStackSection = () => {
   const simulationData = [
     { step: 1, delay: 800, log: '[09:14:22] Sentinel-2 NDVI = 0.21 (threshold: 0.30) — BREACH' },
     { step: 2, delay: 1000, log: '[09:14:23] IMD API confirmed 40 days without rain' },
-    { step: 3, delay: 1200, log: '[09:14:23] Chainlink Oracle posting data to Polygon Mumbai...' },
+    { step: 3, delay: 1200, log: '[09:14:23] Chainlink Oracle posting data to Polygon Amoy...' },
     { step: 4, delay: 2500, log: '[09:14:31] Smart Contract Executed. Tx 0x4a7f...e2d1 confirmed' },
     { step: 5, delay: 1500, log: '[09:14:32] Razorpay payout initiated ₹5,000' },
     { step: 6, delay: 2000, log: '[09:14:34] UPI credit to +91 98xxx — SUCCESS' }
