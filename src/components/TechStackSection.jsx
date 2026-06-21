@@ -48,8 +48,8 @@ const TechStackSection = () => {
   };
 
   useEffect(() => {
-    if (logsEndRef.current) {
-      logsEndRef.current.scrollIntoView({ behavior: 'smooth' });
+    if (logsEndRef.current && logsEndRef.current.parentNode) {
+      logsEndRef.current.parentNode.scrollTop = logsEndRef.current.parentNode.scrollHeight;
     }
   }, [logs]);
 

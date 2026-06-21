@@ -223,6 +223,7 @@
   align-items: center;
   justify-content: center;
   gap: 0.2rem;
+  min-width: 60px;
 }
 
 .arrow-label {
@@ -230,7 +231,7 @@
   color: #888;
   white-space: nowrap;
   position: absolute;
-  top: -1.2rem;
+  top: -2.5rem;
   font-weight: 500;
   text-transform: uppercase;
   letter-spacing: 0.05em;
