@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
+import { MapContainer, TileLayer, Marker, Popup, Circle } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
 import markerIcon from 'leaflet/dist/images/marker-icon.png';
@@ -21,6 +21,10 @@ export default function Dashboard() {
   const [weatherData, setWeatherData] = useState(null);
   const [showUPIModal, setShowUPIModal] = useState(false);
   const [loading, setLoading] = useState(true);
+  
+  // Simulation States
+  const [flashMessage, setFlashMessage] = useState('');
+  const [simulationStep, setSimulationStep] = useState(0); 
 
   // Fetch weather data
   const fetchWeather = async () => {
@@ -30,9 +34,8 @@ export default function Dashboard() {
       setWeatherData(data);
       setLoading(false);
       
-      if (data.status === 'CRITICAL' && data.triggerReached) {
-        setShowUPIModal(true);
-      }
+      // We no longer automatically trigger the modal here during fetch.
+      // We control it manually during the simulation sequence for dramatic effect.
     } catch (error) {
       console.error('Error fetching weather:', error);
       setLoading(false);
@@ -41,34 +44,69 @@ export default function Dashboard() {
 
   useEffect(() => {
     fetchWeather();
-    // Poll every 5 seconds for the demo
+    // Poll every 5 seconds
     const interval = setInterval(fetchWeather, 5000);
     return () => clearInterval(interval);
   }, []);
 
   const handleSimulateDrought = async () => {
-    try {
-      await fetch('http://localhost:3000/api/simulate-trigger', { method: 'POST' });
-      fetchWeather(); // Force immediate update
-    } catch (error) {
-      console.error('Error triggering simulation:', error);
-    }
+    // Disable button to prevent double clicks
+    setSimulationStep(1);
+    
+    // Step 1: Scanning
+    setFlashMessage('🛰️ Scanning satellite & weather nodes for Barmer...');
+    
+    setTimeout(() => {
+      // Step 2: Analyzing
+      setFlashMessage('⚙️ Analyzing parametric triggers (Rainfall & Moisture)...');
+      setSimulationStep(2);
+
+      setTimeout(async () => {
+        // Step 3: Trigger backend
+        setFlashMessage('🚨 ALERT: 40-Day Drought Threshold Breached!');
+        setSimulationStep(3);
+        
+        await fetch('http://localhost:3000/api/simulate-trigger', { method: 'POST' });
+        await fetchWeather(); // Force immediate update to red state
+        
+        setTimeout(() => {
+          // Step 4: Payout processing
+          setFlashMessage('💸 Executing Smart Contract & Initiating UPI Transfer...');
+          setSimulationStep(4);
+          
+          setTimeout(() => {
+            // Step 5: Modal
+            setFlashMessage('');
+            setShowUPIModal(true);
+          }, 2000);
+        }, 2500);
+      }, 3000);
+    }, 3000);
   };
 
   const handleResetSimulation = async () => {
     try {
       await fetch('http://localhost:3000/api/reset-simulation', { method: 'POST' });
-      fetchWeather(); // Force immediate update
+      await fetchWeather();
       setShowUPIModal(false);
+      setSimulationStep(0);
+      setFlashMessage('');
     } catch (error) {
       console.error('Error resetting simulation:', error);
     }
   };
 
   const isCritical = weatherData?.status === 'CRITICAL';
+  const isScanning = simulationStep > 0 && simulationStep < 3;
 
   return (
     <div className="dashboard">
+      {flashMessage && (
+        <div className="demo-flash-message">
+          {flashMessage}
+        </div>
+      )}
+
       {/* LEFT SIDEBAR */}
       <aside className="dashboard-sidebar">
         <Link to="/" className="sidebar-logo">
@@ -129,13 +167,21 @@ export default function Dashboard() {
             <p>Here's your farm overview for today — {new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })}</p>
           </div>
           <div className="topbar-actions">
-            {!isCritical ? (
+            {!isCritical && simulationStep === 0 ? (
                <button 
                 onClick={handleSimulateDrought} 
                 className="btn-primary" 
                 style={{ backgroundColor: 'var(--color-danger)', border: 'none', padding: '10px 16px', borderRadius: 'var(--radius-md)', color: 'white', cursor: 'pointer', fontWeight: 600 }}
               >
                 🌩️ Simulate Drought (Demo)
+              </button>
+            ) : simulationStep > 0 && simulationStep < 4 ? (
+              <button 
+                disabled
+                className="btn-primary" 
+                style={{ backgroundColor: '#666', border: 'none', padding: '10px 16px', borderRadius: 'var(--radius-md)', color: 'white', cursor: 'not-allowed', fontWeight: 600 }}
+              >
+                ⏳ Processing...
               </button>
             ) : (
               <button 
@@ -154,28 +200,26 @@ export default function Dashboard() {
         </header>
 
         {/* Stats Row */}
-        <div className="dashboard-stats-row">
-          <div className="stat-card stat-card-green">
-            <div className="stat-card-icon">✓</div>
-            <div className="stat-card-content">
-              <span className="stat-card-label">Active Policies</span>
-              <span className="stat-card-value">2</span>
+        <div className="stat-cards">
+          <div className="stat-card stat-card--green">
+            <div className="stat-icon">✓</div>
+            <div className="stat-info">
+              <label>Active Policies</label>
+              <strong>2</strong>
             </div>
           </div>
-          <div className="stat-card stat-card-darkgreen">
-            <div className="stat-card-icon">₹</div>
-            <div className="stat-card-content">
-              <span className="stat-card-label">Total Coverage</span>
-              <span className="stat-card-value">₹50,000</span>
+          <div className="stat-card stat-card--dark">
+            <div className="stat-icon">₹</div>
+            <div className="stat-info">
+              <label>Total Coverage</label>
+              <strong>₹50,000</strong>
             </div>
           </div>
-          <div className={`stat-card ${isCritical ? 'stat-card-orange' : 'stat-card-green'}`}>
-            <div className="stat-card-icon">⚠️</div>
-            <div className="stat-card-content">
-              <span className="stat-card-label">Weather Alerts</span>
-              <span className={`stat-card-value ${isCritical ? 'text-white' : ''}`}>
-                {isCritical ? '⚠ 1 Critical' : '✓ All Clear'}
-              </span>
+          <div className={`stat-card ${isCritical ? 'stat-card--amber' : 'stat-card--green'}`}>
+            <div className="stat-icon">⚠️</div>
+            <div className="stat-info">
+              <label>Weather Alerts</label>
+              <strong>{isCritical ? '⚠ 1 Critical' : '✓ All Clear'}</strong>
             </div>
           </div>
         </div>
@@ -185,7 +229,7 @@ export default function Dashboard() {
           <header className="section-header">
             <h3>📍 Ramesh's Registered Plots — Barmer District</h3>
           </header>
-          <div className="map-container">
+          <div className={`map-container ${isScanning ? 'map-radar' : ''}`}>
             <MapContainer center={[25.75, 71.39]} zoom={8} scrollWheelZoom={false} style={{ height: '350px', width: '100%', borderRadius: 'var(--radius-lg)', zIndex: 0 }}>
               <TileLayer
                 attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
@@ -213,6 +257,19 @@ export default function Dashboard() {
                   )}
                 </Popup>
               </Marker>
+              
+              {/* Radar highlight effect during scanning or critical */}
+              {(isScanning || isCritical) && (
+                <Circle 
+                  center={[25.75, 71.39]} 
+                  pathOptions={{ 
+                    fillColor: isCritical ? 'red' : 'blue', 
+                    color: isCritical ? 'red' : 'blue',
+                    fillOpacity: isScanning ? 0.2 : 0.4 
+                  }} 
+                  radius={isScanning ? 30000 : 15000} 
+                />
+              )}
             </MapContainer>
           </div>
         </section>
@@ -236,10 +293,10 @@ export default function Dashboard() {
               </thead>
               <tbody>
                 {isCritical && (
-                  <tr>
+                  <tr style={{ animation: 'fadeInUp 0.5s ease' }}>
                     <td>{new Date().toLocaleDateString('en-GB')}</td>
                     <td>Plot 2 — Barmer</td>
-                    <td className="text-danger">Drought &gt;40 days no rain</td>
+                    <td className="text-danger" style={{ color: 'red' }}>Drought &gt;40 days no rain</td>
                     <td className="amount">₹25,000</td>
                     <td><span className="status-badge success" style={{ background: '#dcfce7', color: '#166534', padding: '4px 8px', borderRadius: '12px', fontSize:'12px', fontWeight:'bold' }}>✓ Paid via UPI</span></td>
                   </tr>
