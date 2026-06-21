@@ -1,6 +1,6 @@
-const express = require('express');
-const cors = require('cors');
-const axios = require('axios');
+import express from 'express';
+import cors from 'cors';
+import axios from 'axios';
 
 const app = express();
 
@@ -113,4 +113,4 @@ app.post('/api/reset-simulation', (req, res) => {
   res.json({ success: true, message: 'Simulation reset. Back to real API data.' });
 });
 
-module.exports = app;
+export default app;
