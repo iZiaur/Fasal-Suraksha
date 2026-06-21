@@ -14,7 +14,7 @@ const TeamSection = () => {
       name: 'Mishti Khanna',
       role: 'Backend Architecture & Research Lead',
       image: 'https://api.dicebear.com/7.x/initials/svg?seed=MK&backgroundColor=e59934&textColor=ffffff&fontSize=40',
-      github: '#',
+      github: 'https://github.com/mishtee-khanna',
       linkedin: 'https://www.linkedin.com/in/mishti-khanna-8b2b7a32b/'
     }
   ];
