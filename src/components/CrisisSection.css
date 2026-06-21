@@ -106,6 +106,7 @@
   transition: transform var(--transition-slow), box-shadow var(--transition-slow);
   display: flex;
   flex-direction: column;
+  height: 100%;
 }
 
 .crisis-card:hover {

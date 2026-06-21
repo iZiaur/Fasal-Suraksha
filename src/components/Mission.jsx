@@ -49,7 +49,7 @@ const features = [
 const stats = [
   { value: '1.2L+', label: 'Target Farmers' },
   { value: '₹4.8Cr', label: 'Projected Impact' },
-  { value: '<60s', label: 'Avg Trigger-to-UPI Latency (Testnet)' },
+  { value: '<60s', label: 'Testnet Latency' },
   { value: 'Instant', label: 'Payout Goal' },
 ];
 
@@ -114,8 +114,8 @@ const Mission = () => {
               Amidst rising climate extremes, Indian farmers face devastating
               crop losses.
               <span className="mission__heading-muted">
-                Traditional insurance fails them with slow payouts and corrupt
-                surveyors.
+                Traditional insurance fails them with slow payouts and manual
+                surveyor delays.
               </span>
               <span className="mission__heading-bold">
                 We automate justice.
@@ -149,7 +149,7 @@ const Mission = () => {
               Fasal Suraksha uses real-time satellite imagery, hyper-local
               weather APIs, and smart contract logic to trigger instant
               micro-insurance payouts the moment climate thresholds are
-              breached — no human intervention, no corruption, no delays.
+              breached — no human intervention, no subjective assessments, no delays.
             </p>
 
             {/* Stats row */}
@@ -161,6 +161,9 @@ const Mission = () => {
                 </div>
               ))}
             </div>
+            <p className="mission__stats-note" style={{ fontSize: '0.75rem', color: '#888', marginTop: '0.5rem', textAlign: 'right' }}>
+              *Target Farmers and Projected Impact are Year 1 projections.
+            </p>
           </div>
         </div>
       </div>

@@ -27,7 +27,7 @@ const crisisCards = [
     title: 'Waited 2 Years. Claim Rejected.',
     description:
       'Under PMFBY, only 1 in 4 claims are ever settled. Bureaucratic delays, disputed assessments, and manual processes mean farmers wait years for payouts that may never arrive.',
-    source: 'CAG Audit Report, 2025 | Govt. of India',
+    source: 'CAG Audit Report 2017 | Govt. of India',
   },
   {
     image:
@@ -37,7 +37,7 @@ const crisisCards = [
     title: 'Depression with No Diagnosis.',
     description:
       'Over 70% of farming communities have zero access to mental health professionals. Depression, anxiety, and trauma go undiagnosed and untreated across rural India.',
-    source: 'The Lancet Psychiatry, 2025 | NIMHANS Study',
+    source: 'Lancet 2018 | NIMHANS Study',
   },
   {
     image:
@@ -47,7 +47,7 @@ const crisisCards = [
     title: '40 Days Without Rain.',
     description:
       'Erratic monsoons and extreme weather events have become the norm. In 2024, over 40% of Indian districts faced drought-like conditions, devastating kharif crops across the country.',
-    source: 'India Meteorological Department, 2025',
+    source: 'IMD Climate Summary 2023',
   },
 ];
 
@@ -118,11 +118,11 @@ const CrisisSection = () => {
           </h2>
 
           <p className="crisis-subtitle">
-            <strong>10,546</strong> farming sector deaths recorded in 2024 alone.
+            <strong>11,290</strong> farming sector suicides recorded in 2022 alone.
             Debt, crop loss, and a broken insurance system are killing our food
             providers.
             <br />
-            <em>— Source: NCRB Report, May 2026</em>
+            <em>— Source: ADSI 2022 Data | NCRB</em>
           </p>
         </div>
 

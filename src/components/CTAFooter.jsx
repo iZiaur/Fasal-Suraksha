@@ -167,7 +167,7 @@ const CTAFooter = () => {
           <div className="footer-col">
             <h4 className="footer-col-title">Team Drishti</h4>
             <nav className="footer-links">
-              <a href="#" target="_blank" rel="noopener noreferrer">Devpost Submission</a>
+              <a href="https://devpost.com/software/fasal-suraksha" target="_blank" rel="noopener noreferrer">Devpost Submission</a>
               <a href="https://github.com/iZiaur/Fasal-Suraksha" target="_blank" rel="noopener noreferrer">GitHub Repository</a>
               <a href="#team">Team Profiles</a>
               <a href="#tech-stack">Tech Stack</a>
@@ -179,13 +179,14 @@ const CTAFooter = () => {
             <h4 className="footer-col-title">Address</h4>
             <p className="footer-address">
               Fasal Suraksha, Jaipur,<br />
-              Rajasthan, India
+              Rajasthan, India <br/>
+              <em>(Demo Inactive)</em>
             </p>
 
             <div className="footer-helpline">
               <p className="footer-label">Helpline</p>
               <p className="footer-helpline-number">1800-FASAL-00</p>
-              <p className="footer-toll-free">Toll Free</p>
+              <p className="footer-toll-free">Toll Free <em>(Demo Inactive)</em></p>
             </div>
 
             <div>
