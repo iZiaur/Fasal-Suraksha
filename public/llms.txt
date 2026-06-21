@@ -1,0 +1,21 @@
+# Fasal Suraksha (कृषि सुरक्षा)
+
+> Parametric crop insurance that pays out automatically — no claims, no paperwork, no waiting.
+
+## Project Overview
+Fasal Suraksha is a next-generation parametric insurance dApp designed for smallholder farmers in India.
+It utilizes Polygon Amoy testnet smart contracts and Chainlink oracles to trigger automated payouts based on satellite NDVI data and IMD rainfall APIs.
+
+## Architecture
+1. **Sentinel-2 Satellite** -> NDVI < 0.3
+2. **IMD Rainfall API** -> Rainfall Data
+3. **Chainlink Oracle** -> Trigger Event
+4. **Smart Contract** -> TX Confirmed
+5. **Razorpay API** -> Payout Request
+6. **UPI Payout** -> Farmer's Bank Account
+
+## Important Links
+- GitHub Repository: https://github.com/iZiaur/Fasal-Suraksha
+- Live Demo: https://fasalsuraksha.vercel.app/
+- Farmer Dashboard: https://fasalsuraksha.vercel.app/dashboard
+- Admin Dashboard: https://fasalsuraksha.vercel.app/admin

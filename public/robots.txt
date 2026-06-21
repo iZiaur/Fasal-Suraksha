@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://fasalsuraksha.vercel.app/sitemap.xml
