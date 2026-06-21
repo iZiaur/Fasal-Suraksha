@@ -7,8 +7,8 @@ export default function Hero() {
       {/* Background Image */}
       <div className="hero-bg">
         <img
-          src="https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=1920&q=80"
-          alt="Green farm field with drone"
+          src="/images/hero-bg.png"
+          alt="Indian farmer in a lush green agricultural field at sunset"
           loading="eager"
         />
         <div className="hero-bg-overlay"></div>
