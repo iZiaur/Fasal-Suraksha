@@ -28,7 +28,7 @@ const plans = [
       'Auto-payout when excess rainfall exceeds 200mm in 72 hours.',
     link: 'View Plan Details →',
     image:
-      'https://images.unsplash.com/photo-1536657464919-892534f60d6e?auto=format&fit=crop&w=800&q=80',
+      '/images/flood.png',
     imageAlt: 'Lush green flooded rice paddy during monsoon',
   },
   {
@@ -41,7 +41,7 @@ const plans = [
       'Activated when temperature sustains above 45°C for 5+ days.',
     link: 'View Plan Details →',
     image:
-      'https://images.unsplash.com/photo-1509005084666-3cbc75184cbb?auto=format&fit=crop&w=800&q=80',
+      '/images/heatwave.png',
     imageAlt: 'Dry cracked earth under intense summer heat',
   },
 ];
