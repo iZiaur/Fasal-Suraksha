@@ -1,6 +1,30 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { MapContainer, TileLayer, Marker, Popup, Circle } from 'react-leaflet';
+import 'leaflet/dist/leaflet.css';
+import L from 'leaflet';
+import markerIcon from 'leaflet/dist/images/marker-icon.png';
+import markerIcon2x from 'leaflet/dist/images/marker-icon-2x.png';
+import markerShadow from 'leaflet/dist/images/marker-shadow.png';
+import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts';
 import './AdminDashboard.css';
+
+// Fix Leaflet default icon issue
+delete L.Icon.Default.prototype._getIconUrl;
+L.Icon.Default.mergeOptions({
+  iconUrl: markerIcon,
+  iconRetinaUrl: markerIcon2x,
+  shadowUrl: markerShadow,
+});
+
+const payoutData = [
+  { name: 'Jan', payouts: 40 },
+  { name: 'Feb', payouts: 30 },
+  { name: 'Mar', payouts: 55 },
+  { name: 'Apr', payouts: 20 },
+  { name: 'May', payouts: 80 },
+  { name: 'Jun', payouts: 120 },
+];
 
 export default function AdminDashboard() {
   const [activeTab, setActiveTab] = useState('overview');
@@ -57,18 +81,18 @@ export default function AdminDashboard() {
         </Link>
 
         <nav className="sidebar-nav">
-          <div className={`sidebar-nav-item ${activeTab === 'overview' ? 'active' : ''}`} onClick={() => setActiveTab('overview')} style={{cursor: 'pointer'}}>
+          <button type="button" className={`sidebar-nav-item ${activeTab === 'overview' ? 'active' : ''}`} onClick={() => setActiveTab('overview')} style={{cursor: 'pointer', background: 'none', border: 'none', width: '100%', textAlign: 'left', fontFamily: 'inherit'}}>
              <span className="nav-icon">📈</span> Overview
-          </div>
-          <div className={`sidebar-nav-item ${activeTab === 'policies' ? 'active' : ''}`} onClick={() => setActiveTab('policies')} style={{cursor: 'pointer'}}>
+          </button>
+          <button type="button" className={`sidebar-nav-item ${activeTab === 'policies' ? 'active' : ''}`} onClick={() => setActiveTab('policies')} style={{cursor: 'pointer', background: 'none', border: 'none', width: '100%', textAlign: 'left', fontFamily: 'inherit'}}>
              <span className="nav-icon">📜</span> All Policies
-          </div>
-          <div className={`sidebar-nav-item ${activeTab === 'payouts' ? 'active' : ''}`} onClick={() => setActiveTab('payouts')} style={{cursor: 'pointer'}}>
+          </button>
+          <button type="button" className={`sidebar-nav-item ${activeTab === 'payouts' ? 'active' : ''}`} onClick={() => setActiveTab('payouts')} style={{cursor: 'pointer', background: 'none', border: 'none', width: '100%', textAlign: 'left', fontFamily: 'inherit'}}>
              <span className="nav-icon">💸</span> Payout Ledgers
-          </div>
-          <div className={`sidebar-nav-item ${activeTab === 'settings' ? 'active' : ''}`} onClick={() => setActiveTab('settings')} style={{cursor: 'pointer'}}>
+          </button>
+          <button type="button" className={`sidebar-nav-item ${activeTab === 'settings' ? 'active' : ''}`} onClick={() => setActiveTab('settings')} style={{cursor: 'pointer', background: 'none', border: 'none', width: '100%', textAlign: 'left', fontFamily: 'inherit'}}>
              <span className="nav-icon">⚙️</span> Settings
-          </div>
+          </button>
         </nav>
 
         <div className="sidebar-user">
@@ -117,6 +141,48 @@ export default function AdminDashboard() {
                   <strong>3 Regions</strong>
                 </div>
               </div>
+            </div>
+
+            {/* Charts & Map Section */}
+            <div className="admin-charts-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(400px, 1fr))', gap: '20px', marginBottom: '30px' }}>
+              <section className="admin-section" style={{ marginBottom: 0 }}>
+                <header className="section-header">
+                  <h3>📊 Payouts by Month (in Lakhs)</h3>
+                </header>
+                <div style={{ width: '100%', height: 250 }}>
+                  <ResponsiveContainer>
+                    <BarChart data={payoutData}>
+                      <XAxis dataKey="name" stroke="#8884d8" />
+                      <YAxis stroke="#8884d8" />
+                      <Tooltip wrapperStyle={{ outline: 'none' }} cursor={{fill: 'transparent'}} />
+                      <Bar dataKey="payouts" fill="#118AB2" radius={[4, 4, 0, 0]} />
+                    </BarChart>
+                  </ResponsiveContainer>
+                </div>
+              </section>
+
+              <section className="admin-section" style={{ marginBottom: 0 }}>
+                <header className="section-header">
+                  <h3>🌍 Active Weather Threats</h3>
+                </header>
+                <div style={{ height: 250, width: '100%', borderRadius: '12px', overflow: 'hidden' }}>
+                  <MapContainer center={[25.75, 73.0]} zoom={6} scrollWheelZoom={false} style={{ height: '100%', width: '100%' }}>
+                    <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
+                    <Marker position={[25.7521, 71.3967]}>
+                      <Popup>Barmer: Drought Risk</Popup>
+                    </Marker>
+                    <Circle center={[25.7521, 71.3967]} radius={50000} pathOptions={{ color: '#D97706', fillColor: '#FDE68A', fillOpacity: 0.4 }} />
+                    <Marker position={[26.2389, 73.0243]}>
+                      <Popup>Jodhpur: Heatwave Warning</Popup>
+                    </Marker>
+                    <Circle center={[26.2389, 73.0243]} radius={40000} pathOptions={{ color: '#DC2626', fillColor: '#FECACA', fillOpacity: 0.4 }} />
+                    <Marker position={[25.1815, 75.8322]}>
+                      <Popup>Kota: Flood Alert</Popup>
+                    </Marker>
+                    <Circle center={[25.1815, 75.8322]} radius={35000} pathOptions={{ color: '#2563EB', fillColor: '#BFDBFE', fillOpacity: 0.4 }} />
+                  </MapContainer>
+                </div>
+              </section>
             </div>
 
             {/* Recent Payouts Ledger Preview */}

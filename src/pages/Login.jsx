@@ -5,17 +5,7 @@ import './Login.css';
 export default function Login() {
   const navigate = useNavigate();
 
-  const handleFarmerLogin = (e) => {
-    e.preventDefault();
-    // MVP mock login
-    navigate('/dashboard');
-  };
 
-  const handleAdminLogin = (e) => {
-    e.preventDefault();
-    // MVP mock login
-    navigate('/admin');
-  };
 
   return (
     <div className="login-container">
@@ -39,17 +29,9 @@ export default function Login() {
           <div className="card-icon">👨‍🌾</div>
           <h2>Farmer Portal</h2>
           <p>Access your parametric policies, view satellite data, and manage your registered plots.</p>
-          <form onSubmit={handleFarmerLogin}>
-            <div className="input-group">
-              <label>Phone Number (Registered)</label>
-              <input type="text" defaultValue="+91 98765 43210" disabled className="mock-input" />
-            </div>
-            <div className="input-group">
-              <label>OTP</label>
-              <input type="text" defaultValue="1234" disabled className="mock-input" />
-            </div>
-            <button type="submit" className="btn-primary">Login as Farmer</button>
-          </form>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', marginTop: '2rem' }}>
+            <Link to="/dashboard" className="btn-primary" style={{ display: 'block', textAlign: 'center', textDecoration: 'none' }}>Login as Farmer</Link>
+          </div>
         </div>
 
         {/* Admin Portal Card */}
@@ -57,17 +39,9 @@ export default function Login() {
           <div className="card-icon">🏛️</div>
           <h2>Insurance Admin</h2>
           <p>Oversee automated payouts, manage parametric triggers, and audit smart contract performance.</p>
-          <form onSubmit={handleAdminLogin}>
-             <div className="input-group">
-              <label>Admin ID</label>
-              <input type="text" defaultValue="admin@fasalsuraksha.in" disabled className="mock-input" />
-            </div>
-            <div className="input-group">
-              <label>Password</label>
-              <input type="password" defaultValue="********" disabled className="mock-input" />
-            </div>
-            <button type="submit" className="btn-secondary">Login as Administrator</button>
-          </form>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', marginTop: '2rem' }}>
+            <Link to="/admin" className="btn-secondary" style={{ display: 'block', textAlign: 'center', textDecoration: 'none' }}>Login as Administrator</Link>
+          </div>
         </div>
       </div>
     </div>

@@ -185,8 +185,7 @@ const CTAFooter = () => {
 
             <div className="footer-helpline">
               <p className="footer-label">Helpline</p>
-              <p className="footer-helpline-number">1800-FASAL-00</p>
-              <p className="footer-toll-free">Toll Free <em>(Demo Inactive)</em></p>
+              <p className="footer-helpline-number">Demo Hotline (inactive)</p>
             </div>
 
             <div>

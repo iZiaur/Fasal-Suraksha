@@ -22,12 +22,12 @@ export default function Hero() {
             <div className="weather-widget-header">
               <div>
                 <div className="weather-widget-label">Live Weather</div>
-                <div className="weather-widget-location">Jaipur, Rajasthan</div>
+                <div className="weather-widget-location">Barmer, Rajasthan</div>
               </div>
               <div className="weather-widget-icon">☀️</div>
             </div>
             <div className="weather-temp">
-              +42°<sub>C</sub>
+              +47°<sub>C</sub>
             </div>
             <div className="weather-alert">Extreme Heat Alert</div>
             <div className="weather-stats">

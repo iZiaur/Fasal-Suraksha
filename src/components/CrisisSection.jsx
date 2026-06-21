@@ -179,7 +179,7 @@ const CrisisSection = () => {
           </div>
 
           <p className="crisis-stats-caption">
-            Top states with highest farmer suicides (NCRB 2024)
+            Top states with highest farmer suicides (NCRB ADSI 2022)
           </p>
         </div>
 

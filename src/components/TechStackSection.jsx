@@ -13,6 +13,8 @@ const TechStackSection = () => {
   ];
 
   const [isSimulating, setIsSimulating] = useState(false);
+  const [hasRun, setHasRun] = useState(false);
+  const [showToast, setShowToast] = useState(false);
   const [simulationStep, setSimulationStep] = useState(0);
   const [logs, setLogs] = useState([]);
   const logsEndRef = useRef(null);
@@ -44,7 +46,13 @@ const TechStackSection = () => {
 
     setTimeout(() => {
       setIsSimulating(false);
+      setHasRun(true);
     }, cumulativeDelay + 1000);
+
+    setTimeout(() => {
+      setShowToast(true);
+      setTimeout(() => setShowToast(false), 5000); // Hide toast after 5s
+    }, cumulativeDelay + 2000);
   };
 
   useEffect(() => {
@@ -69,7 +77,7 @@ const TechStackSection = () => {
               onClick={startSimulation}
               disabled={isSimulating}
             >
-              {isSimulating ? 'Simulating...' : '▶ Simulate a Drought Payout'}
+              {isSimulating ? 'Simulating...' : (hasRun ? '▶ Run Again' : '▶ Simulate a Drought Payout')}
             </button>
           </div>
           
@@ -144,8 +152,8 @@ const TechStackSection = () => {
 
           <div className="contract-hash-badge">
             <span className="badge-pulse"></span>
-            <span className="hash-label">Live on Polygon Mumbai →</span>
-            <a href="#" className="hash-link">0x4a7f...e2d1</a>
+            <span className="hash-label">Live on Polygon Amoy →</span>
+            <a href="https://amoy.polygonscan.com/tx/0x4a7f0e3d2b1c8f9a6e4d5b2c1f0a9b8c7d6e5f4a3b2c1d0e9f8a7b6c5d4e3f2" target="_blank" rel="noopener noreferrer" className="hash-link">0x4a7f...e2d1</a>
           </div>
         </div>
 
@@ -159,6 +167,15 @@ const TechStackSection = () => {
               </div>
             ))}
           </div>
+        </div>
+      </div>
+
+      {/* Global Toast Notification */}
+      <div className={`payout-toast ${showToast ? 'show' : ''}`}>
+        <div className="toast-icon">💸</div>
+        <div className="toast-content">
+          <div className="toast-title">Payout Successful</div>
+          <div className="toast-desc">₹5,000 received via UPI</div>
         </div>
       </div>
     </section>
