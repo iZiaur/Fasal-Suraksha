@@ -37,10 +37,10 @@ export default function Navbar() {
 
         <div className={`navbar-links ${mobileOpen ? 'open' : ''}`}>
           <a href="#how-it-works" className="navbar-link">How It Works</a>
-          <Link to="/dashboard" className="navbar-link">Dashboard</Link>
+          <Link to="/login" className="navbar-link">Dashboard</Link>
           <a href="#coverage-plans" className="navbar-link">Claims</a>
           <a href="#mission" className="navbar-link">About Us</a>
-          <Link to="/dashboard" className="navbar-cta">Register Your Farm</Link>
+          <Link to="/login" className="navbar-cta">Login / Register</Link>
         </div>
 
         <button

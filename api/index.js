@@ -25,11 +25,16 @@ const farms = {
 
 // Global state for Hackathon Demo (Note: In Vercel serverless, this state might reset across cold starts, but will survive during active demo usage)
 let simulationMode = false;
+let globalDroughtThreshold = 40; // Default drought threshold is 40 days
 
 app.get('/api/weather/:farmId', async (req, res) => {
   const farm = farms[req.params.farmId] || farms['plot-2'];
 
-  if (simulationMode) {
+  // Check if current drought days (mocked as 12 for normal, 40 for disaster) breaches the dynamic threshold
+  const currentDroughtDaysNormal = 12;
+  const currentDroughtDaysDisaster = 40;
+
+  if (simulationMode || currentDroughtDaysDisaster >= globalDroughtThreshold && simulationMode) {
     // 💥 DISASTER SIMULATION MODE (Hackathon override)
     return res.json({
       status: 'CRITICAL',
@@ -39,8 +44,8 @@ app.get('/api/weather/:farmId', async (req, res) => {
         humidity: 8,
         rainfall30Days: 0.0,
         soilMoisture: 4,
-        droughtDays: 40,
-        droughtThreshold: 40,
+        droughtDays: currentDroughtDaysDisaster,
+        droughtThreshold: globalDroughtThreshold,
         message: 'Drought parameter breached! Payout triggered.'
       }
     });
@@ -49,16 +54,16 @@ app.get('/api/weather/:farmId', async (req, res) => {
   // 🌍 NORMAL MODE (Real API Data)
   if (!OPENWEATHER_API_KEY) {
       return res.json({
-        status: 'HEALTHY',
-        triggerReached: false,
+        status: currentDroughtDaysNormal >= globalDroughtThreshold ? 'CRITICAL' : 'HEALTHY',
+        triggerReached: currentDroughtDaysNormal >= globalDroughtThreshold,
         data: {
           temp: 38,
           humidity: 25,
           rainfall30Days: 15.0,
           soilMoisture: 30,
-          droughtDays: 10,
-          droughtThreshold: 40,
-          message: 'Fallback healthy data (No API Key).'
+          droughtDays: currentDroughtDaysNormal,
+          droughtThreshold: globalDroughtThreshold,
+          message: currentDroughtDaysNormal >= globalDroughtThreshold ? 'Threshold breached via admin override!' : 'Fallback healthy data (No API Key).'
         }
       });
   }
@@ -68,34 +73,37 @@ app.get('/api/weather/:farmId', async (req, res) => {
     const response = await axios.get(url);
     const weatherData = response.data;
 
+    const isBreached = currentDroughtDaysNormal >= globalDroughtThreshold;
+
     // We mix real data with our parametric business logic
     res.json({
-      status: 'HEALTHY',
-      triggerReached: false,
+      status: isBreached ? 'CRITICAL' : 'HEALTHY',
+      triggerReached: isBreached,
       data: {
         temp: Math.round(weatherData.main.temp),
         humidity: weatherData.main.humidity,
         rainfall30Days: 12.5, // Mock historical for baseline
         soilMoisture: 35,
-        droughtDays: 12, // Baseline
-        droughtThreshold: 40,
-        message: 'Weather within normal parameters.'
+        droughtDays: currentDroughtDaysNormal,
+        droughtThreshold: globalDroughtThreshold,
+        message: isBreached ? 'Threshold breached via admin override!' : 'Weather within normal parameters.'
       }
     });
   } catch (error) {
     console.error('Weather API Error:', error.message);
+    const isBreached = currentDroughtDaysNormal >= globalDroughtThreshold;
     // Fallback if API fails
     res.json({
-      status: 'HEALTHY',
-      triggerReached: false,
+      status: isBreached ? 'CRITICAL' : 'HEALTHY',
+      triggerReached: isBreached,
       data: {
         temp: 38,
         humidity: 25,
         rainfall30Days: 15.0,
         soilMoisture: 30,
-        droughtDays: 10,
-        droughtThreshold: 40,
-        message: 'Fallback healthy data.'
+        droughtDays: currentDroughtDaysNormal,
+        droughtThreshold: globalDroughtThreshold,
+        message: isBreached ? 'Threshold breached via admin override!' : 'Fallback healthy data.'
       }
     });
   }
@@ -111,6 +119,17 @@ app.post('/api/simulate-trigger', (req, res) => {
 app.post('/api/reset-simulation', (req, res) => {
   simulationMode = false;
   res.json({ success: true, message: 'Simulation reset. Back to real API data.' });
+});
+
+// Endpoint to modify threshold for the Admin dashboard
+app.post('/api/settings/threshold', (req, res) => {
+  const { newThreshold } = req.body;
+  if (typeof newThreshold === 'number') {
+    globalDroughtThreshold = newThreshold;
+    res.json({ success: true, message: `Drought threshold updated to ${newThreshold} days.` });
+  } else {
+    res.status(400).json({ success: false, message: 'Invalid threshold value.' });
+  }
 });
 
 export default app;
