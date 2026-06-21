@@ -11,7 +11,7 @@ import './CrisisSection.css';
 const crisisCards = [
   {
     image:
-      'https://images.unsplash.com/photo-1604594849809-dfedbc827105?auto=format&fit=crop&w=800&q=80',
+      '/images/crisis_debt.png',
     tagLabel: 'The Debt Trap',
     tagColor: 'red',
     title: '₹3 Lakh Debt. Zero Payout.',
@@ -21,7 +21,7 @@ const crisisCards = [
   },
   {
     image:
-      'https://images.unsplash.com/photo-1568667256549-094345857637?auto=format&fit=crop&w=800&q=80',
+      '/images/crisis_insurance.png',
     tagLabel: 'Insurance That Never Pays',
     tagColor: 'orange',
     title: 'Waited 2 Years. Claim Rejected.',
@@ -31,7 +31,7 @@ const crisisCards = [
   },
   {
     image:
-      'https://images.unsplash.com/photo-1516585427167-9f4af9627e6c?auto=format&fit=crop&w=800&q=80',
+      '/images/crisis_mental_health.png',
     tagLabel: 'The Silent Mental Health Crisis',
     tagColor: 'red',
     title: 'Depression with No Diagnosis.',
@@ -41,7 +41,7 @@ const crisisCards = [
   },
   {
     image:
-      'https://images.unsplash.com/photo-1509390144018-eeaf65052242?auto=format&fit=crop&w=800&q=80',
+      '/images/crisis_climate.png',
     tagLabel: 'Climate is the New Enemy',
     tagColor: 'amber',
     title: '40 Days Without Rain.',
