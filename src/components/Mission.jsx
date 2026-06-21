@@ -47,10 +47,10 @@ const features = [
 ];
 
 const stats = [
-  { value: '1.2L+', label: 'Farmers Enrolled' },
-  { value: '₹4.8Cr', label: 'Payouts Disbursed' },
-  { value: '99.2%', label: 'Payout Accuracy' },
-  { value: '<24h', label: 'Avg. Payout Time' },
+  { value: '1.2L+', label: 'Target Farmers' },
+  { value: '₹4.8Cr', label: 'Projected Impact' },
+  { value: '100%', label: 'Smart Contract Accuracy' },
+  { value: 'Instant', label: 'Payout Goal' },
 ];
 
 /* Unsplash images — aerial Indian farmland */
@@ -102,7 +102,7 @@ const Mission = () => {
       <div className="mission__container">
         {/* Section pill tag */}
         <div className="mission__tag mission__animate">
-          <span className="section-tag">Our Mission</span>
+          <span className="section-tag">The Drishti Vision</span>
         </div>
 
         {/* Two-column grid */}

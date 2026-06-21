@@ -86,7 +86,7 @@ const photos = [
   {
     src: '/images/crowd.png',
     alt: 'Large crowd of people',
-    caption: 'Farmers Enrolled in Network',
+    caption: 'Simulated Farmer Network',
   },
   {
     src: 'https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=800&q=80',

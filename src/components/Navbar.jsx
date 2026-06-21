@@ -39,7 +39,7 @@ export default function Navbar() {
           <a href="#crisis" className="navbar-link">Aim</a>
           <a href="#how-it-works" className="navbar-link">How It Works</a>
           <a href="#coverage-plans" className="navbar-link">Claim</a>
-          <a href="#mission" className="navbar-link">About Us</a>
+          <a href="#mission" className="navbar-link">Team Drishti</a>
           <Link to="/login" className="navbar-cta">Login / Register</Link>
         </div>
 

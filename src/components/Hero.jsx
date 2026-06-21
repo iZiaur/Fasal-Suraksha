@@ -94,9 +94,9 @@ export default function Hero() {
           </h1>
 
           <p className="hero-description">
-            India's first automated crop insurance. No paperwork. No
-            surveyors. Instant payouts triggered by real-time weather
-            data directly to your UPI.
+            A hackathon prototype for automated crop insurance by Team Drishti.
+            No paperwork. No surveyors. Instant payouts triggered by real-time
+            weather data directly to your UPI.
           </p>
 
           <div className="hero-buttons">
@@ -125,7 +125,7 @@ export default function Hero() {
               </div>
             </div>
             <span className="hero-proof-text">
-              1.2 Lakh+ Farmers Protected
+              Built for the Future of Farming
             </span>
             <span className="hero-proof-check">✓</span>
           </div>

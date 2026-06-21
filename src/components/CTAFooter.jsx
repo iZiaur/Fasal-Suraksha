@@ -61,7 +61,7 @@ const CTAFooter = () => {
                 <polyline points="20 6 9 17 4 12" />
               </svg>
             </span>
-            Trusted by 1.2 Lakh+ Farmers Across Rajasthan, Maharashtra &amp; UP
+            A Hackathon Prototype Conceptualized and Built by Team Drishti
           </div>
         </div>
       </section>
@@ -180,12 +180,12 @@ const CTAFooter = () => {
 
           {/* ---- Column 5: Legal ---- */}
           <div className="footer-col">
-            <h4 className="footer-col-title">Legal</h4>
+            <h4 className="footer-col-title">Team Drishti</h4>
             <nav className="footer-links">
-              <a href="#">Terms of Service</a>
-              <a href="#">Privacy Policy</a>
-              <a href="#">IRDAI Compliance</a>
-              <a href="#">Grievance</a>
+              <a href="#">Devpost Submission</a>
+              <a href="#">GitHub Repository</a>
+              <a href="#">Team Profiles</a>
+              <a href="#">Project Demo</a>
             </nav>
           </div>
 
@@ -216,7 +216,7 @@ const CTAFooter = () => {
         <div className="footer-bottom">
           <div className="footer-bottom-inner">
             <span className="footer-copyright">
-              &copy; 2026 Fasal Suraksha. All Rights Reserved.
+              Built with ❤️ by Team Drishti for the Build for Good Hackathon.
             </span>
 
             <div className="footer-bottom-links">
@@ -229,7 +229,7 @@ const CTAFooter = () => {
 
             <span className="footer-made-with">
               <span className="footer-made-dot" />
-              Made with care for Indian farmers
+              Team Drishti Prototype
             </span>
           </div>
         </div>
