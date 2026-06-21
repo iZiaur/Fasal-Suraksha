@@ -98,7 +98,7 @@ const cropGallery = [
   {
     id: 'rice',
     label: 'Rice Paddies',
-    image: 'https://images.unsplash.com/photo-1536054337816-e0f9b0e6e4ec?auto=format&fit=crop&w=600&q=80',
+    image: 'https://images.unsplash.com/photo-1589923188900-85dae523342b?auto=format&fit=crop&w=600&q=80',
   },
   {
     id: 'wheat',
