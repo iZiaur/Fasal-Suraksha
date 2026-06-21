@@ -129,27 +129,27 @@ export default function Dashboard() {
         </Link>
 
         <nav className="sidebar-nav">
-          <button type="button" className={`sidebar-nav-item ${activeTab === 'dashboard' ? 'active' : ''}`} onClick={() => setActiveTab('dashboard')} style={{cursor: 'pointer', background: 'none', border: 'none', width: '100%', textAlign: 'left', fontFamily: 'inherit', color: 'inherit'}}>
+          <button type="button" className={`sidebar-nav-item ${activeTab === 'dashboard' ? 'active' : ''}`} onClick={() => setActiveTab('dashboard')} style={{cursor: 'pointer', background: 'none', border: 'none', width: '100%', textAlign: 'left', fontFamily: 'inherit'}}>
             <span className="nav-icon">📊</span>
             Dashboard
           </button>
-          <button type="button" className={`sidebar-nav-item ${activeTab === 'farms' ? 'active' : ''}`} onClick={() => setActiveTab('farms')} style={{cursor: 'pointer', background: 'none', border: 'none', width: '100%', textAlign: 'left', fontFamily: 'inherit', color: 'inherit'}}>
+          <button type="button" className={`sidebar-nav-item ${activeTab === 'farms' ? 'active' : ''}`} onClick={() => setActiveTab('farms')} style={{cursor: 'pointer', background: 'none', border: 'none', width: '100%', textAlign: 'left', fontFamily: 'inherit'}}>
             <span className="nav-icon">🗺️</span>
             My Farms
           </button>
-          <button type="button" className={`sidebar-nav-item ${activeTab === 'policies' ? 'active' : ''}`} onClick={() => setActiveTab('policies')} style={{cursor: 'pointer', background: 'none', border: 'none', width: '100%', textAlign: 'left', fontFamily: 'inherit', color: 'inherit'}}>
+          <button type="button" className={`sidebar-nav-item ${activeTab === 'policies' ? 'active' : ''}`} onClick={() => setActiveTab('policies')} style={{cursor: 'pointer', background: 'none', border: 'none', width: '100%', textAlign: 'left', fontFamily: 'inherit'}}>
             <span className="nav-icon">🛡️</span>
             My Policies
           </button>
-          <button type="button" className={`sidebar-nav-item ${activeTab === 'payouts' ? 'active' : ''}`} onClick={() => setActiveTab('payouts')} style={{cursor: 'pointer', background: 'none', border: 'none', width: '100%', textAlign: 'left', fontFamily: 'inherit', color: 'inherit'}}>
+          <button type="button" className={`sidebar-nav-item ${activeTab === 'payouts' ? 'active' : ''}`} onClick={() => setActiveTab('payouts')} style={{cursor: 'pointer', background: 'none', border: 'none', width: '100%', textAlign: 'left', fontFamily: 'inherit'}}>
             <span className="nav-icon">💸</span>
             Payout History
           </button>
-          <button type="button" className={`sidebar-nav-item ${activeTab === 'alerts' ? 'active' : ''}`} onClick={() => setActiveTab('alerts')} style={{cursor: 'pointer', background: 'none', border: 'none', width: '100%', textAlign: 'left', fontFamily: 'inherit', color: 'inherit'}}>
+          <button type="button" className={`sidebar-nav-item ${activeTab === 'alerts' ? 'active' : ''}`} onClick={() => setActiveTab('alerts')} style={{cursor: 'pointer', background: 'none', border: 'none', width: '100%', textAlign: 'left', fontFamily: 'inherit'}}>
             <span className="nav-icon">☁️</span>
             Weather Alerts
           </button>
-          <button type="button" className={`sidebar-nav-item ${activeTab === 'help' ? 'active' : ''}`} onClick={() => setActiveTab('help')} style={{cursor: 'pointer', background: 'none', border: 'none', width: '100%', textAlign: 'left', fontFamily: 'inherit', color: 'inherit'}}>
+          <button type="button" className={`sidebar-nav-item ${activeTab === 'help' ? 'active' : ''}`} onClick={() => setActiveTab('help')} style={{cursor: 'pointer', background: 'none', border: 'none', width: '100%', textAlign: 'left', fontFamily: 'inherit'}}>
             <span className="nav-icon">❓</span>
             Help
           </button>
