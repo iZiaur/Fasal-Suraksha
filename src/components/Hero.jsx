@@ -85,7 +85,9 @@ export default function Hero() {
 
         {/* Right Side — Hero Text */}
         <div className="hero-text">
-          <div className="hero-tag">Climate-Smart Insurance</div>
+          <div className="hero-tag">
+            Climate-Smart Insurance <span style={{ margin: '0 8px', opacity: 0.5 }}>•</span> कृषि सुरक्षा
+          </div>
 
           <h1 className="hero-title">
             Protect Your<br />

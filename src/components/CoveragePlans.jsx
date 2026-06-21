@@ -215,18 +215,9 @@ const CoveragePlans = () => {
                       <span className="cp__accordionNumber">{item.number}</span>
                       <span className="cp__accordionTitle">{item.title}</span>
                       <span className="cp__accordionIcon">
-                        {isOpen ? (
-                          /* Minus icon */
-                          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                            <line x1="5" y1="12" x2="19" y2="12" />
-                          </svg>
-                        ) : (
-                          /* Plus icon */
-                          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                            <line x1="12" y1="5" x2="12" y2="19" />
-                            <line x1="5" y1="12" x2="19" y2="12" />
-                          </svg>
-                        )}
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                          <polyline points="6 9 12 15 18 9"></polyline>
+                        </svg>
                       </span>
                     </button>
 

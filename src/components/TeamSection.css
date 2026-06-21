@@ -1,0 +1,142 @@
+.team-section {
+  padding: 6rem 5%;
+  background-color: #f7f6f2; /* matches existing theme */
+  position: relative;
+}
+
+.team-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.team-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.team-title {
+  font-size: 2.5rem;
+  font-family: 'Playfair Display', serif;
+  color: #1a3622;
+  margin-top: 1rem;
+}
+
+.team-quote-card {
+  background-color: #1a3622;
+  color: #f7f6f2;
+  padding: 3rem;
+  border-radius: 16px;
+  text-align: center;
+  margin-bottom: 4rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  position: relative;
+}
+
+.quote-icon {
+  width: 40px;
+  height: 40px;
+  color: #e59934;
+  margin-bottom: 1.5rem;
+}
+
+.team-quote-text {
+  font-size: 1.25rem;
+  line-height: 1.8;
+  font-family: 'Inter', sans-serif;
+  margin-bottom: 1.5rem;
+  font-style: italic;
+  font-weight: 300;
+}
+
+.team-quote-author {
+  font-weight: 600;
+  color: #e59934;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  font-size: 0.9rem;
+}
+
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+  justify-content: center;
+}
+
+.team-card {
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s ease;
+}
+
+.team-card:hover {
+  transform: translateY(-5px);
+}
+
+.team-card-image {
+  width: 100%;
+  height: 300px;
+  overflow: hidden;
+}
+
+.team-card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.team-card:hover .team-card-image img {
+  transform: scale(1.05);
+}
+
+.team-card-content {
+  padding: 1.5rem;
+  text-align: center;
+}
+
+.team-member-name {
+  font-size: 1.25rem;
+  color: #1a3622;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.team-member-role {
+  color: #666;
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+}
+
+.team-social-links {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.team-social-links a {
+  color: #1a3622;
+  width: 24px;
+  height: 24px;
+  opacity: 0.7;
+  transition: opacity 0.2s ease, color 0.2s ease;
+}
+
+.team-social-links a:hover {
+  opacity: 1;
+  color: #e59934;
+}
+
+@media (max-width: 768px) {
+  .team-title {
+    font-size: 2rem;
+  }
+  .team-quote-card {
+    padding: 2rem;
+  }
+  .team-quote-text {
+    font-size: 1.1rem;
+  }
+}

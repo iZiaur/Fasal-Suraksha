@@ -17,7 +17,7 @@ const crisisCards = [
     title: '₹3 Lakh Debt. Zero Payout.',
     description:
       'The average indebted farmer household owes over ₹3 lakh. When crop failure strikes, there is no safety net — just rising interest and mounting desperation that pushes families to the brink.',
-    source: 'The Economic Times, 2026 | NCRB Data',
+    source: 'ADSI 2022 Data | NCRB',
   },
   {
     image:

@@ -6,6 +6,8 @@ import LiveMonitoring from '../components/LiveMonitoring';
 import ImpactInnovation from '../components/ImpactInnovation';
 import CoveragePlans from '../components/CoveragePlans';
 import CrisisSection from '../components/CrisisSection';
+import TeamSection from '../components/TeamSection';
+import TechStackSection from '../components/TechStackSection';
 import CTAFooter from '../components/CTAFooter';
 
 export default function LandingPage() {
@@ -19,6 +21,8 @@ export default function LandingPage() {
       <LiveMonitoring />
       <ImpactInnovation />
       <CoveragePlans />
+      <TechStackSection />
+      <TeamSection />
       <CTAFooter />
     </>
   );

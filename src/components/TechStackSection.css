@@ -1,0 +1,151 @@
+.tech-section {
+  padding: 6rem 5%;
+  background-color: #ffffff;
+  position: relative;
+  border-top: 1px solid #eaeaea;
+}
+
+.tech-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.tech-header {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.tech-title {
+  font-size: 2.5rem;
+  font-family: 'Playfair Display', serif;
+  color: #1a3622;
+  margin-top: 1rem;
+}
+
+.architecture-container {
+  background-color: #f7f6f2;
+  border-radius: 16px;
+  padding: 3rem;
+  margin-bottom: 3rem;
+  text-align: center;
+}
+
+.architecture-title {
+  font-family: 'Inter', sans-serif;
+  color: #1a3622;
+  margin-bottom: 2.5rem;
+  font-size: 1.5rem;
+}
+
+.architecture-diagram {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 2.5rem;
+}
+
+.arch-node {
+  background: white;
+  padding: 1rem 1.5rem;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+  border: 1px solid #eaeaea;
+  min-width: 120px;
+}
+
+.arch-node.highlight {
+  background: #1a3622;
+  color: white;
+  border: none;
+}
+
+.arch-node.final {
+  background: #2b5c38;
+  color: white;
+  border: none;
+}
+
+.arch-icon {
+  font-size: 2rem;
+}
+
+.arch-label {
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.arch-arrow {
+  color: #999;
+  font-weight: bold;
+  font-size: 1.5rem;
+}
+
+.contract-hash {
+  display: inline-block;
+  background: rgba(26, 54, 34, 0.05);
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  font-family: monospace;
+}
+
+.hash-label {
+  color: #666;
+  margin-right: 0.5rem;
+}
+
+.hash-link {
+  color: #1a3622;
+  font-weight: 600;
+  text-decoration: underline;
+}
+
+.stack-container {
+  text-align: center;
+}
+
+.stack-title {
+  font-size: 1.25rem;
+  color: #666;
+  margin-bottom: 1.5rem;
+}
+
+.stack-badges {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.stack-badge {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  background: #f7f6f2;
+  border-radius: 20px;
+  font-weight: 500;
+  color: #1a3622;
+  border: 1px solid #eaeaea;
+}
+
+.badge-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+@media (max-width: 900px) {
+  .architecture-diagram {
+    flex-direction: column;
+  }
+  .arch-arrow {
+    transform: rotate(90deg);
+  }
+}

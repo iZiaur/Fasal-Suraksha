@@ -1,9 +1,27 @@
 /* =========================================
    Navbar Styles
    ========================================= */
-.navbar {
+.hackathon-ribbon {
   position: fixed;
   top: 0;
+  left: 0;
+  right: 0;
+  height: 30px;
+  background: #02042B; /* Dark navy or black */
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  z-index: 1001;
+}
+
+.navbar {
+  position: fixed;
+  top: 30px; /* Offset for the ribbon */
   left: 0;
   right: 0;
   z-index: 1000;

@@ -49,7 +49,7 @@ const features = [
 const stats = [
   { value: '1.2L+', label: 'Target Farmers' },
   { value: '₹4.8Cr', label: 'Projected Impact' },
-  { value: '100%', label: 'Smart Contract Accuracy' },
+  { value: '<60s', label: 'Avg Trigger-to-UPI Latency (Testnet)' },
   { value: 'Instant', label: 'Payout Goal' },
 ];
 

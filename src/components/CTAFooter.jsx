@@ -128,21 +128,6 @@ const CTAFooter = () => {
               </a>
             </div>
 
-            {/* Regulatory Badges */}
-            <div className="footer-badges">
-              <span className="footer-badge">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
-                </svg>
-                IRDAI Reg.
-              </span>
-              <span className="footer-badge">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                  <polyline points="20 6 9 17 4 12" />
-                </svg>
-                Govt. Approved
-              </span>
-            </div>
           </div>
 
           {/* ---- Column 2: Platform ---- */}
@@ -182,10 +167,10 @@ const CTAFooter = () => {
           <div className="footer-col">
             <h4 className="footer-col-title">Team Drishti</h4>
             <nav className="footer-links">
-              <a href="#">Devpost Submission</a>
-              <a href="#">GitHub Repository</a>
-              <a href="#">Team Profiles</a>
-              <a href="#">Project Demo</a>
+              <a href="#" target="_blank" rel="noopener noreferrer">Devpost Submission</a>
+              <a href="https://github.com/iZiaur/Fasal-Suraksha" target="_blank" rel="noopener noreferrer">GitHub Repository</a>
+              <a href="#team">Team Profiles</a>
+              <a href="#tech-stack">Tech Stack</a>
             </nav>
           </div>
 
