@@ -84,13 +84,13 @@ const mapDots = [
    ────────────────────────────────────────── */
 const photos = [
   {
-    src: '/images/crowd.png',
-    alt: 'Large crowd of people',
+    src: '/images/farmer_network.png',
+    alt: 'Farmers looking at a tablet together',
     caption: 'Simulated Farmer Network',
   },
   {
-    src: 'https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=800&q=80',
-    alt: 'Data monitoring workstation',
+    src: '/images/monitoring_workstation.png',
+    alt: 'High tech agricultural monitoring control room',
     caption: 'Monitoring Workstation',
   },
 ];
