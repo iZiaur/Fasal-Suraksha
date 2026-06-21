@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
@@ -7,6 +7,7 @@ import markerIcon from 'leaflet/dist/images/marker-icon.png';
 import markerIcon2x from 'leaflet/dist/images/marker-icon-2x.png';
 import markerShadow from 'leaflet/dist/images/marker-shadow.png';
 import './Dashboard.css';
+import UPIPayoutModal from '../components/UPIPayoutModal';
 
 // Fix Leaflet default icon issue
 delete L.Icon.Default.prototype._getIconUrl;
@@ -17,6 +18,55 @@ L.Icon.Default.mergeOptions({
 });
 
 export default function Dashboard() {
+  const [weatherData, setWeatherData] = useState(null);
+  const [showUPIModal, setShowUPIModal] = useState(false);
+  const [loading, setLoading] = useState(true);
+
+  // Fetch weather data
+  const fetchWeather = async () => {
+    try {
+      const response = await fetch('http://localhost:3000/api/weather/plot-2');
+      const data = await response.json();
+      setWeatherData(data);
+      setLoading(false);
+      
+      if (data.status === 'CRITICAL' && data.triggerReached) {
+        setShowUPIModal(true);
+      }
+    } catch (error) {
+      console.error('Error fetching weather:', error);
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchWeather();
+    // Poll every 5 seconds for the demo
+    const interval = setInterval(fetchWeather, 5000);
+    return () => clearInterval(interval);
+  }, []);
+
+  const handleSimulateDrought = async () => {
+    try {
+      await fetch('http://localhost:3000/api/simulate-trigger', { method: 'POST' });
+      fetchWeather(); // Force immediate update
+    } catch (error) {
+      console.error('Error triggering simulation:', error);
+    }
+  };
+
+  const handleResetSimulation = async () => {
+    try {
+      await fetch('http://localhost:3000/api/reset-simulation', { method: 'POST' });
+      fetchWeather(); // Force immediate update
+      setShowUPIModal(false);
+    } catch (error) {
+      console.error('Error resetting simulation:', error);
+    }
+  };
+
+  const isCritical = weatherData?.status === 'CRITICAL';
+
   return (
     <div className="dashboard">
       {/* LEFT SIDEBAR */}
@@ -76,15 +126,29 @@ export default function Dashboard() {
         <header className="dashboard-topbar">
           <div className="topbar-greeting">
             <h1>Namaste, Ramesh Ji 🙏</h1>
-            <p>Here's your farm overview for today — 18 June 2026</p>
+            <p>Here's your farm overview for today — {new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })}</p>
           </div>
           <div className="topbar-actions">
+            {!isCritical ? (
+               <button 
+                onClick={handleSimulateDrought} 
+                className="btn-primary" 
+                style={{ backgroundColor: 'var(--color-danger)', border: 'none', padding: '10px 16px', borderRadius: 'var(--radius-md)', color: 'white', cursor: 'pointer', fontWeight: 600 }}
+              >
+                🌩️ Simulate Drought (Demo)
+              </button>
+            ) : (
+              <button 
+                onClick={handleResetSimulation} 
+                className="btn-primary" 
+                style={{ backgroundColor: 'var(--color-primary)', border: 'none', padding: '10px 16px', borderRadius: 'var(--radius-md)', color: 'white', cursor: 'pointer', fontWeight: 600 }}
+              >
+                🔄 Reset Demo
+              </button>
+            )}
             <div className="notification-bell">
               🔔
-              <span className="notification-badge">2</span>
-            </div>
-            <div className="alerts-pill">
-              ⚠️ 2 new alerts
+              {isCritical && <span className="notification-badge" style={{position:'absolute', top:'-5px', right:'-5px', background:'red', color:'white', borderRadius:'50%', width:'20px', height:'20px', display:'flex', alignItems:'center', justifyContent:'center', fontSize:'12px'}}>1</span>}
             </div>
           </div>
         </header>
@@ -105,11 +169,13 @@ export default function Dashboard() {
               <span className="stat-card-value">₹50,000</span>
             </div>
           </div>
-          <div className="stat-card stat-card-orange">
+          <div className={`stat-card ${isCritical ? 'stat-card-orange' : 'stat-card-green'}`}>
             <div className="stat-card-icon">⚠️</div>
             <div className="stat-card-content">
               <span className="stat-card-label">Weather Alerts</span>
-              <span className="stat-card-value text-white">⚠ 1 Critical</span>
+              <span className={`stat-card-value ${isCritical ? 'text-white' : ''}`}>
+                {isCritical ? '⚠ 1 Critical' : '✓ All Clear'}
+              </span>
             </div>
           </div>
         </div>
@@ -133,11 +199,18 @@ export default function Dashboard() {
               </Marker>
               <Marker position={[25.75, 71.39]}>
                 <Popup>
-                  <div className="popup-critical">
-                    <strong>⚠️ Plot 2 — Barmer</strong><br />
-                    39 days no rain<br />
-                    <span className="text-danger">Drought trigger at 40 days</span>
-                  </div>
+                  {isCritical ? (
+                    <div className="popup-critical" style={{ color: 'red' }}>
+                      <strong>⚠️ Plot 2 — Barmer</strong><br />
+                      40 days no rain<br />
+                      <strong>Drought trigger breached</strong>
+                    </div>
+                  ) : (
+                    <div>
+                       <strong>Plot 2 — Barmer</strong><br />
+                       Healthy
+                    </div>
+                  )}
                 </Popup>
               </Marker>
             </MapContainer>
@@ -162,12 +235,21 @@ export default function Dashboard() {
                 </tr>
               </thead>
               <tbody>
+                {isCritical && (
+                  <tr>
+                    <td>{new Date().toLocaleDateString('en-GB')}</td>
+                    <td>Plot 2 — Barmer</td>
+                    <td className="text-danger">Drought &gt;40 days no rain</td>
+                    <td className="amount">₹25,000</td>
+                    <td><span className="status-badge success" style={{ background: '#dcfce7', color: '#166534', padding: '4px 8px', borderRadius: '12px', fontSize:'12px', fontWeight:'bold' }}>✓ Paid via UPI</span></td>
+                  </tr>
+                )}
                 <tr>
                   <td>15 May 2026</td>
                   <td>Plot 1 — Jodhpur</td>
                   <td>Heatwave &gt;45°C for 7 days</td>
                   <td className="amount">₹5,000</td>
-                  <td><span className="status-badge success">✓ Paid via UPI</span></td>
+                  <td><span className="status-badge success" style={{ background: '#dcfce7', color: '#166534', padding: '4px 8px', borderRadius: '12px', fontSize:'12px', fontWeight:'bold' }}>✓ Paid via UPI</span></td>
                 </tr>
               </tbody>
             </table>
@@ -183,58 +265,75 @@ export default function Dashboard() {
             <span className="icon">📡</span> LIVE WEATHER
           </div>
           <div className="location">Barmer, Rajasthan</div>
-          <div className="temperature-critical">
-            46°<span className="unit">C</span>
-            <span className="badge-critical">Critical</span>
-          </div>
-          <div className="weather-details">
-            <div className="detail-row">
-              <span>Rainfall (last 30 days)</span>
-              <span className="value danger">0.0 mm</span>
-            </div>
-            <div className="detail-row">
-              <span>Soil Moisture</span>
-              <span className="value danger">12%</span>
-            </div>
-            <div className="detail-row">
-              <span>Next Forecast</span>
-              <span className="value">No rain — 5 days</span>
-            </div>
-          </div>
           
-          <div className="trigger-progress">
-            <div className="progress-header">
-              <span>Drought Trigger</span>
-              <span>39/40 days</span>
-            </div>
-            <div className="progress-bar-container">
-              <div className="progress-bar critical" style={{ width: '97.5%' }}></div>
-            </div>
-            <div className="progress-message">97.5% reached — Payout imminent</div>
-          </div>
+          {loading ? (
+            <div>Loading live weather...</div>
+          ) : (
+            <>
+              <div className={isCritical ? "temperature-critical" : "temperature-normal"} style={{ fontSize: '3rem', fontWeight: 'bold', color: isCritical ? 'red' : '#2D6A4F', display: 'flex', alignItems: 'center', gap: '10px' }}>
+                {weatherData?.data?.temp}°<span className="unit" style={{ fontSize: '1.5rem'}}>C</span>
+                {isCritical && <span className="badge-critical" style={{ background: 'red', color: 'white', fontSize: '0.8rem', padding: '2px 8px', borderRadius: '10px'}}>Critical</span>}
+              </div>
+              <div className="weather-details" style={{ marginTop: '20px', display: 'flex', flexDirection: 'column', gap: '10px' }}>
+                <div className="detail-row" style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.9rem' }}>
+                  <span style={{ color: '#666' }}>Rainfall (last 30 days)</span>
+                  <span className={`value ${isCritical ? 'danger' : ''}`} style={{ fontWeight: 600, color: isCritical ? 'red' : 'inherit' }}>{weatherData?.data?.rainfall30Days} mm</span>
+                </div>
+                <div className="detail-row" style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.9rem' }}>
+                  <span style={{ color: '#666' }}>Soil Moisture</span>
+                  <span className={`value ${isCritical ? 'danger' : ''}`} style={{ fontWeight: 600, color: isCritical ? 'red' : 'inherit' }}>{weatherData?.data?.soilMoisture}%</span>
+                </div>
+                <div className="detail-row" style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.9rem' }}>
+                  <span style={{ color: '#666' }}>Status Message</span>
+                  <span className="value" style={{ fontWeight: 600, maxWidth: '120px', textAlign: 'right' }}>{weatherData?.data?.message}</span>
+                </div>
+              </div>
+              
+              <div className="trigger-progress" style={{ marginTop: '20px', padding: '15px', background: isCritical ? '#FEF2F2' : '#F0FDF4', borderRadius: '10px' }}>
+                <div className="progress-header" style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.9rem', marginBottom: '8px', fontWeight: 'bold', color: isCritical ? 'red' : '#166534' }}>
+                  <span>Drought Trigger</span>
+                  <span>{weatherData?.data?.droughtDays}/{weatherData?.data?.droughtThreshold} days</span>
+                </div>
+                <div className="progress-bar-container" style={{ background: isCritical ? '#FECACA' : '#BBF7D0', height: '8px', borderRadius: '4px', overflow: 'hidden' }}>
+                  <div className={`progress-bar ${isCritical ? 'critical' : ''}`} style={{ width: `${(weatherData?.data?.droughtDays / weatherData?.data?.droughtThreshold) * 100}%`, background: isCritical ? 'red' : '#16a34a', height: '100%', transition: 'width 0.5s ease' }}></div>
+                </div>
+                <div className="progress-message" style={{ fontSize: '0.8rem', marginTop: '8px', color: isCritical ? 'red' : '#166534', fontWeight: 600 }}>
+                  {isCritical ? '100% reached — Payout triggered' : 'Safe levels'}
+                </div>
+              </div>
+            </>
+          )}
         </div>
 
         {/* Active Coverage Card */}
-        <div className="rightbar-card coverage-card">
-          <div className="card-header">
+        <div className="rightbar-card coverage-card" style={{ marginTop: '20px' }}>
+          <div className="card-header" style={{ fontSize: '0.9rem', fontWeight: 700, color: '#666', marginBottom: '15px' }}>
             ACTIVE COVERAGE
           </div>
-          <div className="coverage-item">
+          <div className="coverage-item" style={{ borderBottom: '1px solid #eee', paddingBottom: '10px', marginBottom: '10px', display: 'flex', justifyContent: 'space-between' }}>
             <div className="coverage-info">
-              <h4>Plot 1 — Jodhpur</h4>
-              <p>Wheat</p>
+              <h4 style={{ margin: 0, fontSize: '1rem', color: '#111' }}>Plot 1 — Jodhpur</h4>
+              <p style={{ margin: 0, fontSize: '0.85rem', color: '#666' }}>Wheat</p>
             </div>
-            <div className="coverage-amount">₹25,000</div>
+            <div className="coverage-amount" style={{ fontWeight: 'bold', color: '#16a34a' }}>₹25,000</div>
           </div>
-          <div className="coverage-item">
+          <div className="coverage-item" style={{ display: 'flex', justifyContent: 'space-between' }}>
             <div className="coverage-info">
-              <h4>Plot 2 — Barmer</h4>
-              <p>Bajra</p>
+              <h4 style={{ margin: 0, fontSize: '1rem', color: '#111' }}>Plot 2 — Barmer</h4>
+              <p style={{ margin: 0, fontSize: '0.85rem', color: '#666' }}>Bajra</p>
             </div>
-            <div className="coverage-amount">₹25,000</div>
+            <div className="coverage-amount" style={{ fontWeight: 'bold', color: '#16a34a' }}>₹25,000</div>
           </div>
         </div>
       </aside>
+
+      <UPIPayoutModal 
+        isOpen={showUPIModal} 
+        onClose={() => setShowUPIModal(false)}
+        amount={25000}
+        farmerName="Ramesh Patel"
+        triggerEvent="40 Days Without Rain (Drought)"
+      />
     </div>
   );
 }
