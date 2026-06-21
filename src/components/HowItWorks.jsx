@@ -11,7 +11,7 @@ const steps = [
     description:
       'Drop a pin on the map to mark your farm. Select your crop type and coverage period. Done in 60 seconds.',
     image:
-      'https://images.unsplash.com/photo-1524661135-423995f22d0b?auto=format&fit=crop&w=800&q=80',
+      '/images/step_register.png',
     imageAlt: 'Satellite chip on a wooden table representing farm registration',
     /* SVG icon: map-pin / location */
     icon: (
@@ -27,7 +27,7 @@ const steps = [
     description:
       'Our system monitors rainfall, temperature, and soil moisture 24/7 using satellite data and local weather stations for your exact GPS location.',
     image:
-      'https://images.unsplash.com/photo-1504639725590-34d0984388bd?auto=format&fit=crop&w=800&q=80',
+      '/images/step_weather.png',
     imageAlt: 'Weather monitoring radar screen with data visualisation',
     /* SVG icon: radar / signal */
     icon: (
@@ -45,7 +45,7 @@ const steps = [
     description:
       'If drought, flood, or heatwave thresholds are breached, money hits your bank account automatically. No claim forms. No waiting.',
     image:
-      'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=800&q=80',
+      '/images/step_payout.png',
     imageAlt: 'Smartphone showing a UPI payment confirmation screen',
     /* SVG icon: credit-card / payment */
     icon: (
