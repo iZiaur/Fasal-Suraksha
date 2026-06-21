@@ -41,9 +41,20 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   gap: 1rem;
   margin-bottom: 2.5rem;
+  overflow-x: auto;
+  padding-bottom: 1rem;
+}
+
+/* Hide scrollbar for cleaner look but keep functionality */
+.architecture-diagram::-webkit-scrollbar {
+  height: 6px;
+}
+.architecture-diagram::-webkit-scrollbar-thumb {
+  background-color: #ccc;
+  border-radius: 4px;
 }
 
 .arch-node {
@@ -144,6 +155,11 @@
   border-radius: 50%;
 }
 
+@media (max-width: 1000px) {
+  .architecture-diagram {
+    justify-content: flex-start;
+  }
+}
 @media (max-width: 900px) {
   .architecture-diagram {
     flex-direction: column;
