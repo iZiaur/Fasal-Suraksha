@@ -53,10 +53,6 @@ const TechStackSection = () => {
               <span className="arch-label">UPI Payout</span>
             </div>
           </div>
-          <div className="contract-hash">
-            <span className="hash-label">Testnet Contract (Sepolia):</span>
-            <a href="#" className="hash-link">0x7a2...4f9C</a>
-          </div>
         </div>
 
         <div className="stack-container">
