@@ -22,6 +22,7 @@ export default function Dashboard() {
   const [showUPIModal, setShowUPIModal] = useState(false);
   const [loading, setLoading] = useState(true);
   const [activeTab, setActiveTab] = useState('dashboard');
+  const [lang, setLang] = useState('en');
   
   // Simulation States
   const [flashMessage, setFlashMessage] = useState('');
@@ -131,27 +132,27 @@ export default function Dashboard() {
         <nav className="sidebar-nav">
           <button type="button" className={`sidebar-nav-item ${activeTab === 'dashboard' ? 'active' : ''}`} onClick={() => setActiveTab('dashboard')}>
             <span className="nav-icon">📊</span>
-            Dashboard
+            {lang === 'hi' ? 'डैशबोर्ड' : 'Dashboard'}
           </button>
           <button type="button" className={`sidebar-nav-item ${activeTab === 'farms' ? 'active' : ''}`} onClick={() => setActiveTab('farms')}>
             <span className="nav-icon">🗺️</span>
-            My Farms
+            {lang === 'hi' ? 'मेरे खेत' : 'My Farms'}
           </button>
           <button type="button" className={`sidebar-nav-item ${activeTab === 'policies' ? 'active' : ''}`} onClick={() => setActiveTab('policies')}>
             <span className="nav-icon">🛡️</span>
-            My Policies
+            {lang === 'hi' ? 'मेरी पॉलिसियाँ' : 'My Policies'}
           </button>
           <button type="button" className={`sidebar-nav-item ${activeTab === 'payouts' ? 'active' : ''}`} onClick={() => setActiveTab('payouts')}>
             <span className="nav-icon">💸</span>
-            Payout History
+            {lang === 'hi' ? 'भुगतान इतिहास' : 'Payout History'}
           </button>
           <button type="button" className={`sidebar-nav-item ${activeTab === 'alerts' ? 'active' : ''}`} onClick={() => setActiveTab('alerts')}>
             <span className="nav-icon">☁️</span>
-            Weather Alerts
+            {lang === 'hi' ? 'मौसम अलर्ट' : 'Weather Alerts'}
           </button>
           <button type="button" className={`sidebar-nav-item ${activeTab === 'help' ? 'active' : ''}`} onClick={() => setActiveTab('help')}>
             <span className="nav-icon">❓</span>
-            Help
+            {lang === 'hi' ? 'सहायता' : 'Help'}
           </button>
         </nav>
 
@@ -171,8 +172,8 @@ export default function Dashboard() {
           <main className="dashboard-main">
             <header className="dashboard-topbar">
           <div className="topbar-greeting">
-            <h1>Namaste, Ramesh Ji 🙏</h1>
-            <p>Here's your farm overview for today — {new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })}</p>
+            <h1>नमस्ते, रमेश जी 🙏</h1>
+            <p>{lang === 'hi' ? 'आज के लिए आपके खेत का अवलोकन' : "Here's your farm overview for today"} — {new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })}</p>
           </div>
           <div className="topbar-actions">
             {!isCritical && simulationStep === 0 ? (
@@ -182,21 +183,21 @@ export default function Dashboard() {
                   className="btn-primary" 
                   style={{ backgroundColor: '#D97706', border: 'none', padding: '10px 16px', borderRadius: 'var(--radius-md)', color: 'white', cursor: 'pointer', fontWeight: 600 }}
                 >
-                  🌩️ Drought
+                  🌩️ {lang === 'hi' ? 'सूखा' : 'Drought'}
                 </button>
                 <button 
                   onClick={() => handleSimulateTrigger('heatwave', 'Heatwave')} 
                   className="btn-primary" 
                   style={{ backgroundColor: '#DC2626', border: 'none', padding: '10px 16px', borderRadius: 'var(--radius-md)', color: 'white', cursor: 'pointer', fontWeight: 600 }}
                 >
-                  🔥 Heatwave
+                  🔥 {lang === 'hi' ? 'हीटवेव' : 'Heatwave'}
                 </button>
                 <button 
                   onClick={() => handleSimulateTrigger('flood', 'Flood')} 
                   className="btn-primary" 
                   style={{ backgroundColor: '#2563EB', border: 'none', padding: '10px 16px', borderRadius: 'var(--radius-md)', color: 'white', cursor: 'pointer', fontWeight: 600 }}
                 >
-                  🌊 Flood
+                  🌊 {lang === 'hi' ? 'बाढ़' : 'Flood'}
                 </button>
                </div>
             ) : simulationStep > 0 && simulationStep < 4 ? (
@@ -205,7 +206,7 @@ export default function Dashboard() {
                 className="btn-primary" 
                 style={{ backgroundColor: '#666', border: 'none', padding: '10px 16px', borderRadius: 'var(--radius-md)', color: 'white', cursor: 'not-allowed', fontWeight: 600 }}
               >
-                ⏳ Processing...
+                ⏳ {lang === 'hi' ? 'प्रोसेसिंग...' : 'Processing...'}
               </button>
             ) : (
               <button 
@@ -216,6 +217,10 @@ export default function Dashboard() {
                 🔄 Reset Demo
               </button>
             )}
+            <div style={{ display: 'flex', background: '#f0f0f0', borderRadius: '20px', overflow: 'hidden', border: '1px solid #ddd', marginRight: '15px' }}>
+              <button onClick={() => setLang('en')} style={{ padding: '6px 12px', fontSize: '13px', background: lang === 'en' ? '#1a3622' : 'transparent', color: lang === 'en' ? 'white' : '#666', border: 'none', cursor: 'pointer', fontWeight: 'bold' }}>EN</button>
+              <button onClick={() => setLang('hi')} style={{ padding: '6px 12px', fontSize: '13px', background: lang === 'hi' ? '#1a3622' : 'transparent', color: lang === 'hi' ? 'white' : '#666', border: 'none', cursor: 'pointer', fontWeight: 'bold' }}>HI</button>
+            </div>
             <div className="notification-bell">
               🔔
               {isCritical && <span className="notification-badge" style={{position:'absolute', top:'-5px', right:'-5px', background:'red', color:'white', borderRadius:'50%', width:'20px', height:'20px', display:'flex', alignItems:'center', justifyContent:'center', fontSize:'12px'}}>1</span>}
