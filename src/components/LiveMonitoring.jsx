@@ -84,13 +84,13 @@ const mapDots = [
    ────────────────────────────────────────── */
 const photos = [
   {
-    src: 'https://images.unsplash.com/photo-1577705998148-6da4f3963bc8?auto=format&fit=crop&w=800&q=80',
-    alt: 'Large crowd of Indian farmers',
+    src: 'https://images.unsplash.com/photo-1523580494112-071d16940363?auto=format&fit=crop&w=800&q=80',
+    alt: 'Large crowd of people',
     caption: 'Farmers Enrolled in Network',
   },
   {
-    src: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80',
-    alt: 'Workstation displaying data dashboards',
+    src: 'https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=800&q=80',
+    alt: 'Data monitoring workstation',
     caption: 'Monitoring Workstation',
   },
 ];
