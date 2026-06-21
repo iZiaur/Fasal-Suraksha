@@ -84,14 +84,14 @@ const mapDots = [
    ────────────────────────────────────────── */
 const photos = [
   {
-    src: 'https://images.unsplash.com/photo-1604594849809-dfedbc827105?auto=format&fit=crop&w=800&q=80',
-    alt: 'Farmer standing in a field',
-    caption: 'Farmer Enrolled in Network',
+    src: 'https://images.unsplash.com/photo-1577705998148-6da4f3963bc8?auto=format&fit=crop&w=800&q=80',
+    alt: 'Large crowd of Indian farmers',
+    caption: 'Farmers Enrolled in Network',
   },
   {
-    src: 'https://images.unsplash.com/photo-1532007271951-c487760934ae?auto=format&fit=crop&w=800&q=80',
-    alt: 'Automated weather station measuring wind and climate',
-    caption: 'IoT Farm Weather Station',
+    src: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80',
+    alt: 'Workstation displaying data dashboards',
+    caption: 'Monitoring Workstation',
   },
 ];
 
