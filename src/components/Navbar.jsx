@@ -36,9 +36,9 @@ export default function Navbar() {
         </Link>
 
         <div className={`navbar-links ${mobileOpen ? 'open' : ''}`}>
+          <a href="#crisis" className="navbar-link">Aim</a>
           <a href="#how-it-works" className="navbar-link">How It Works</a>
-          <Link to="/login" className="navbar-link">Dashboard</Link>
-          <a href="#coverage-plans" className="navbar-link">Claims</a>
+          <a href="#coverage-plans" className="navbar-link">Claim</a>
           <a href="#mission" className="navbar-link">About Us</a>
           <Link to="/login" className="navbar-cta">Login / Register</Link>
         </div>
