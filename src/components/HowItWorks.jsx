@@ -11,7 +11,7 @@ const steps = [
     description:
       'Drop a pin on the map to mark your farm. Select your crop type and coverage period. Done in 60 seconds.',
     image:
-      'https://images.unsplash.com/photo-1586771107445-b3e7eb5e0f2e?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1524661135-423995f22d0b?auto=format&fit=crop&w=800&q=80',
     imageAlt: 'Satellite chip on a wooden table representing farm registration',
     /* SVG icon: map-pin / location */
     icon: (
