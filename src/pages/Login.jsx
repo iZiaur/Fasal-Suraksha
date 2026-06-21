@@ -1,11 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import './Login.css';
 
 export default function Login() {
   const navigate = useNavigate();
+  const [lang, setLang] = useState('en');
 
-
+  const toggleLang = () => setLang(l => l === 'en' ? 'hi' : 'en');
 
   return (
     <div className="login-container">
@@ -25,12 +26,16 @@ export default function Login() {
 
       <div className="login-cards">
         {/* Farmer Portal Card */}
-        <div className="login-card farmer-card">
+        <div className="login-card farmer-card" style={{ position: 'relative' }}>
+          <div style={{ position: 'absolute', top: '15px', right: '15px', display: 'flex', background: '#f0f0f0', borderRadius: '20px', overflow: 'hidden', border: '1px solid #ddd' }}>
+            <button onClick={() => setLang('en')} style={{ padding: '4px 10px', fontSize: '12px', background: lang === 'en' ? '#1a3622' : 'transparent', color: lang === 'en' ? 'white' : '#666', border: 'none', cursor: 'pointer', fontWeight: 'bold' }}>EN</button>
+            <button onClick={() => setLang('hi')} style={{ padding: '4px 10px', fontSize: '12px', background: lang === 'hi' ? '#1a3622' : 'transparent', color: lang === 'hi' ? 'white' : '#666', border: 'none', cursor: 'pointer', fontWeight: 'bold' }}>HI</button>
+          </div>
           <div className="card-icon">👨‍🌾</div>
-          <h2>Farmer Portal</h2>
-          <p>Access your parametric policies, view satellite data, and manage your registered plots.</p>
+          <h2>{lang === 'en' ? 'Farmer Portal' : 'किसान पोर्टल'}</h2>
+          <p>{lang === 'en' ? 'Access your parametric policies, view satellite data, and manage your registered plots.' : 'अपनी पैरामीट्रिक पॉलिसियों तक पहुंचें, सैटेलाइट डेटा देखें और अपने पंजीकृत खेतों का प्रबंधन करें।'}</p>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', marginTop: '2rem' }}>
-            <Link to="/dashboard" className="btn-primary" style={{ display: 'block', textAlign: 'center', textDecoration: 'none' }}>Login as Farmer</Link>
+            <Link to="/dashboard" className="btn-primary" style={{ display: 'block', textAlign: 'center', textDecoration: 'none' }}>{lang === 'en' ? 'Login as Farmer' : 'किसान के रूप में लॉगिन करें'}</Link>
           </div>
         </div>
 
