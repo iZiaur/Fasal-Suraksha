@@ -23,113 +23,109 @@ const farms = {
   }
 };
 
-// Global state for Hackathon Demo (Note: In Vercel serverless, this state might reset across cold starts, but will survive during active demo usage)
+// Global state for Hackathon Demo
 let simulationMode = false;
-let globalDroughtThreshold = 40; // Default drought threshold is 40 days
+let simulationType = null; // 'drought', 'heatwave', 'flood'
+let globalDroughtThreshold = 40; // days
+let globalHeatwaveThreshold = 45; // Celsius
+let globalFloodThreshold = 200; // mm
 
 app.get('/api/weather/:farmId', async (req, res) => {
   const farm = farms[req.params.farmId] || farms['plot-2'];
 
-  // Check if current drought days (mocked as 12 for normal, 40 for disaster) breaches the dynamic threshold
-  const currentDroughtDaysNormal = 12;
-  const currentDroughtDaysDisaster = 40;
+  const currentNormal = {
+    temp: 38,
+    humidity: 25,
+    rainfall30Days: 15.0,
+    soilMoisture: 30,
+    droughtDays: 12
+  };
 
-  if (simulationMode || currentDroughtDaysDisaster >= globalDroughtThreshold && simulationMode) {
-    // 💥 DISASTER SIMULATION MODE (Hackathon override)
+  const currentDisaster = {
+    drought: { temp: 48, humidity: 8, rainfall30Days: 0, soilMoisture: 4, droughtDays: 45 },
+    heatwave: { temp: 49, humidity: 15, rainfall30Days: 5, soilMoisture: 10, droughtDays: 20 },
+    flood: { temp: 28, humidity: 95, rainfall30Days: 250, soilMoisture: 100, droughtDays: 0 }
+  };
+
+  if (simulationMode && simulationType && currentDisaster[simulationType]) {
+    const data = currentDisaster[simulationType];
     return res.json({
       status: 'CRITICAL',
       triggerReached: true,
+      triggerType: simulationType,
       data: {
-        temp: 48,
-        humidity: 8,
-        rainfall30Days: 0.0,
-        soilMoisture: 4,
-        droughtDays: currentDroughtDaysDisaster,
+        ...data,
         droughtThreshold: globalDroughtThreshold,
-        message: 'Drought parameter breached! Payout triggered.'
+        heatwaveThreshold: globalHeatwaveThreshold,
+        floodThreshold: globalFloodThreshold,
+        message: `${simulationType.toUpperCase()} parameter breached! Payout triggered.`
       }
     });
   }
 
-  // 🌍 NORMAL MODE (Real API Data)
-  if (!OPENWEATHER_API_KEY) {
-      return res.json({
-        status: currentDroughtDaysNormal >= globalDroughtThreshold ? 'CRITICAL' : 'HEALTHY',
-        triggerReached: currentDroughtDaysNormal >= globalDroughtThreshold,
-        data: {
-          temp: 38,
-          humidity: 25,
-          rainfall30Days: 15.0,
-          soilMoisture: 30,
-          droughtDays: currentDroughtDaysNormal,
-          droughtThreshold: globalDroughtThreshold,
-          message: currentDroughtDaysNormal >= globalDroughtThreshold ? 'Threshold breached via admin override!' : 'Fallback healthy data (No API Key).'
-        }
-      });
-  }
-
+  // 🌍 NORMAL MODE (Real API Data if available)
+  let weatherData = null;
   try {
-    const url = `https://api.openweathermap.org/data/2.5/weather?lat=${farm.lat}&lon=${farm.lon}&appid=${OPENWEATHER_API_KEY}&units=metric`;
-    const response = await axios.get(url);
-    const weatherData = response.data;
-
-    const isBreached = currentDroughtDaysNormal >= globalDroughtThreshold;
-
-    // We mix real data with our parametric business logic
-    res.json({
-      status: isBreached ? 'CRITICAL' : 'HEALTHY',
-      triggerReached: isBreached,
-      data: {
-        temp: Math.round(weatherData.main.temp),
-        humidity: weatherData.main.humidity,
-        rainfall30Days: 12.5, // Mock historical for baseline
-        soilMoisture: 35,
-        droughtDays: currentDroughtDaysNormal,
-        droughtThreshold: globalDroughtThreshold,
-        message: isBreached ? 'Threshold breached via admin override!' : 'Weather within normal parameters.'
-      }
-    });
-  } catch (error) {
-    console.error('Weather API Error:', error.message);
-    const isBreached = currentDroughtDaysNormal >= globalDroughtThreshold;
-    // Fallback if API fails
-    res.json({
-      status: isBreached ? 'CRITICAL' : 'HEALTHY',
-      triggerReached: isBreached,
-      data: {
-        temp: 38,
-        humidity: 25,
-        rainfall30Days: 15.0,
-        soilMoisture: 30,
-        droughtDays: currentDroughtDaysNormal,
-        droughtThreshold: globalDroughtThreshold,
-        message: isBreached ? 'Threshold breached via admin override!' : 'Fallback healthy data.'
-      }
-    });
+    if (OPENWEATHER_API_KEY) {
+      const url = `https://api.openweathermap.org/data/2.5/weather?lat=${farm.lat}&lon=${farm.lon}&appid=${OPENWEATHER_API_KEY}&units=metric`;
+      const response = await axios.get(url);
+      weatherData = response.data;
+    }
+  } catch (err) {
+    console.error('Weather API Error:', err.message);
   }
+
+  const temp = weatherData ? Math.round(weatherData.main.temp) : currentNormal.temp;
+  const humidity = weatherData ? weatherData.main.humidity : currentNormal.humidity;
+
+  const isDrought = currentNormal.droughtDays >= globalDroughtThreshold;
+  const isHeatwave = temp >= globalHeatwaveThreshold;
+  const isFlood = currentNormal.rainfall30Days >= globalFloodThreshold;
+  
+  const isBreached = isDrought || isHeatwave || isFlood;
+  let breachMessage = 'Weather within normal parameters.';
+  if (isDrought) breachMessage = 'Drought threshold breached via admin override!';
+  if (isHeatwave) breachMessage = 'Heatwave threshold breached via admin override!';
+  if (isFlood) breachMessage = 'Flood threshold breached via admin override!';
+
+  res.json({
+    status: isBreached ? 'CRITICAL' : 'HEALTHY',
+    triggerReached: isBreached,
+    triggerType: isDrought ? 'drought' : (isHeatwave ? 'heatwave' : (isFlood ? 'flood' : null)),
+    data: {
+      temp,
+      humidity,
+      rainfall30Days: currentNormal.rainfall30Days,
+      soilMoisture: currentNormal.soilMoisture,
+      droughtDays: currentNormal.droughtDays,
+      droughtThreshold: globalDroughtThreshold,
+      heatwaveThreshold: globalHeatwaveThreshold,
+      floodThreshold: globalFloodThreshold,
+      message: breachMessage
+    }
+  });
 });
 
-// The magic endpoint for the live pitch
 app.post('/api/simulate-trigger', (req, res) => {
+  const { type } = req.body; // 'drought', 'heatwave', 'flood'
   simulationMode = true;
-  res.json({ success: true, message: 'Simulation activated. Drought parameters triggered.' });
+  simulationType = type || 'drought';
+  res.json({ success: true, message: `Simulation activated: ${simulationType}` });
 });
 
-// To reset the demo
 app.post('/api/reset-simulation', (req, res) => {
   simulationMode = false;
+  simulationType = null;
   res.json({ success: true, message: 'Simulation reset. Back to real API data.' });
 });
 
-// Endpoint to modify threshold for the Admin dashboard
+// Admin endpoints to modify thresholds
 app.post('/api/settings/threshold', (req, res) => {
-  const { newThreshold } = req.body;
-  if (typeof newThreshold === 'number') {
-    globalDroughtThreshold = newThreshold;
-    res.json({ success: true, message: `Drought threshold updated to ${newThreshold} days.` });
-  } else {
-    res.status(400).json({ success: false, message: 'Invalid threshold value.' });
-  }
+  const { drought, heatwave, flood } = req.body;
+  if (drought !== undefined) globalDroughtThreshold = Number(drought);
+  if (heatwave !== undefined) globalHeatwaveThreshold = Number(heatwave);
+  if (flood !== undefined) globalFloodThreshold = Number(flood);
+  res.json({ success: true, message: `Thresholds updated.` });
 });
 
 export default app;

@@ -50,7 +50,7 @@ export default function Dashboard() {
     return () => clearInterval(interval);
   }, []);
 
-  const handleSimulateDrought = async () => {
+  const handleSimulateTrigger = async (type, label) => {
     // Disable button to prevent double clicks
     setSimulationStep(1);
     
@@ -59,15 +59,19 @@ export default function Dashboard() {
     
     setTimeout(() => {
       // Step 2: Analyzing
-      setFlashMessage('⚙️ Analyzing parametric triggers (Rainfall & Moisture)...');
+      setFlashMessage(`⚙️ Analyzing parametric triggers (${label})...`);
       setSimulationStep(2);
 
       setTimeout(async () => {
         // Step 3: Trigger backend
-        setFlashMessage('🚨 ALERT: 40-Day Drought Threshold Breached!');
+        setFlashMessage(`🚨 ALERT: ${label} Threshold Breached!`);
         setSimulationStep(3);
         
-        await fetch('/api/simulate-trigger', { method: 'POST' });
+        await fetch('/api/simulate-trigger', { 
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ type })
+        });
         await fetchWeather(); // Force immediate update to red state
         
         setTimeout(() => {
@@ -172,13 +176,29 @@ export default function Dashboard() {
           </div>
           <div className="topbar-actions">
             {!isCritical && simulationStep === 0 ? (
-               <button 
-                onClick={handleSimulateDrought} 
-                className="btn-primary" 
-                style={{ backgroundColor: 'var(--color-danger)', border: 'none', padding: '10px 16px', borderRadius: 'var(--radius-md)', color: 'white', cursor: 'pointer', fontWeight: 600 }}
-              >
-                🌩️ Simulate Drought (Demo)
-              </button>
+               <div style={{ display: 'flex', gap: '10px' }}>
+                 <button 
+                  onClick={() => handleSimulateTrigger('drought', 'Drought')} 
+                  className="btn-primary" 
+                  style={{ backgroundColor: '#D97706', border: 'none', padding: '10px 16px', borderRadius: 'var(--radius-md)', color: 'white', cursor: 'pointer', fontWeight: 600 }}
+                >
+                  🌩️ Drought
+                </button>
+                <button 
+                  onClick={() => handleSimulateTrigger('heatwave', 'Heatwave')} 
+                  className="btn-primary" 
+                  style={{ backgroundColor: '#DC2626', border: 'none', padding: '10px 16px', borderRadius: 'var(--radius-md)', color: 'white', cursor: 'pointer', fontWeight: 600 }}
+                >
+                  🔥 Heatwave
+                </button>
+                <button 
+                  onClick={() => handleSimulateTrigger('flood', 'Flood')} 
+                  className="btn-primary" 
+                  style={{ backgroundColor: '#2563EB', border: 'none', padding: '10px 16px', borderRadius: 'var(--radius-md)', color: 'white', cursor: 'pointer', fontWeight: 600 }}
+                >
+                  🌊 Flood
+                </button>
+               </div>
             ) : simulationStep > 0 && simulationStep < 4 ? (
               <button 
                 disabled
@@ -250,8 +270,7 @@ export default function Dashboard() {
                   {isCritical ? (
                     <div className="popup-critical" style={{ color: 'red' }}>
                       <strong>⚠️ Plot 2 — Barmer</strong><br />
-                      40 days no rain<br />
-                      <strong>Drought trigger breached</strong>
+                      <strong>{weatherData?.triggerType?.toUpperCase()} trigger breached</strong>
                     </div>
                   ) : (
                     <div>
@@ -300,7 +319,7 @@ export default function Dashboard() {
                   <tr style={{ animation: 'fadeInUp 0.5s ease' }}>
                     <td>{new Date().toLocaleDateString('en-GB')}</td>
                     <td>Plot 2 — Barmer</td>
-                    <td className="text-danger" style={{ color: 'red' }}>Drought &gt;40 days no rain</td>
+                    <td className="text-danger" style={{ color: 'red', textTransform: 'capitalize' }}>{weatherData?.triggerType} Protocol Breached</td>
                     <td className="amount">₹25,000</td>
                     <td><span className="status-badge success" style={{ background: '#dcfce7', color: '#166534', padding: '4px 8px', borderRadius: '12px', fontSize:'12px', fontWeight:'bold' }}>✓ Paid via UPI</span></td>
                   </tr>
@@ -352,11 +371,11 @@ export default function Dashboard() {
               
               <div className="trigger-progress" style={{ marginTop: '20px', padding: '15px', background: isCritical ? '#FEF2F2' : '#F0FDF4', borderRadius: '10px' }}>
                 <div className="progress-header" style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.9rem', marginBottom: '8px', fontWeight: 'bold', color: isCritical ? 'red' : '#166534' }}>
-                  <span>Drought Trigger</span>
-                  <span>{weatherData?.data?.droughtDays}/{weatherData?.data?.droughtThreshold} days</span>
+                  <span style={{ textTransform: 'capitalize' }}>{weatherData?.triggerType || 'Drought'} Trigger</span>
+                  <span>{isCritical ? '100' : '30'}%</span>
                 </div>
                 <div className="progress-bar-container" style={{ background: isCritical ? '#FECACA' : '#BBF7D0', height: '8px', borderRadius: '4px', overflow: 'hidden' }}>
-                  <div className={`progress-bar ${isCritical ? 'critical' : ''}`} style={{ width: `${(weatherData?.data?.droughtDays / weatherData?.data?.droughtThreshold) * 100}%`, background: isCritical ? 'red' : '#16a34a', height: '100%', transition: 'width 0.5s ease' }}></div>
+                  <div className={`progress-bar ${isCritical ? 'critical' : ''}`} style={{ width: isCritical ? '100%' : '30%', background: isCritical ? 'red' : '#16a34a', height: '100%', transition: 'width 0.5s ease' }}></div>
                 </div>
                 <div className="progress-message" style={{ fontSize: '0.8rem', marginTop: '8px', color: isCritical ? 'red' : '#166534', fontWeight: 600 }}>
                   {isCritical ? '100% reached — Payout triggered' : 'Safe levels'}
@@ -509,8 +528,8 @@ export default function Dashboard() {
           <div style={{ display: 'flex', flexDirection: 'column', gap: '15px', marginTop: '20px' }}>
             {isCritical && (
                <div style={{ background: '#FEF2F2', border: '1px solid #FECACA', padding: '20px', borderRadius: '10px' }}>
-                 <h3 style={{ color: '#DC2626', display: 'flex', alignItems: 'center', gap: '10px', margin: '0 0 10px 0' }}>🚨 CRITICAL: Severe Drought Detected</h3>
-                 <p style={{ color: '#991B1B', margin: 0 }}>Barmer District has surpassed 40 consecutive days with &lt; 20mm rainfall. Payouts have been authorized for affected plots.</p>
+                 <h3 style={{ color: '#DC2626', display: 'flex', alignItems: 'center', gap: '10px', margin: '0 0 10px 0', textTransform: 'uppercase' }}>🚨 CRITICAL: Severe {weatherData?.triggerType} Detected</h3>
+                 <p style={{ color: '#991B1B', margin: 0 }}>Barmer District has surpassed the critical threshold for {weatherData?.triggerType}. Payouts have been authorized for affected plots.</p>
                  <div style={{ marginTop: '10px', fontSize: '12px', color: '#DC2626', fontWeight: 'bold' }}>{new Date().toLocaleString()}</div>
                </div>
             )}
@@ -554,7 +573,7 @@ export default function Dashboard() {
         onClose={() => setShowUPIModal(false)}
         amount={25000}
         farmerName="Ramesh Patel"
-        triggerEvent="40 Days Without Rain (Drought)"
+        triggerEvent={`${weatherData?.triggerType?.toUpperCase() || 'DROUGHT'} Protocol Breached`}
       />
     </div>
   );
