@@ -48,27 +48,30 @@
 
 .arch-node {
   background: white;
-  padding: 1rem 1.5rem;
+  padding: 1rem;
   border-radius: 8px;
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   gap: 0.5rem;
   box-shadow: 0 4px 15px rgba(0,0,0,0.05);
   border: 1px solid #eaeaea;
-  min-width: 120px;
+  width: 140px;
+  height: 120px;
+  box-sizing: border-box;
 }
 
 .arch-node.highlight {
   background: #1a3622;
   color: white;
-  border: none;
+  border: 1px solid transparent;
 }
 
 .arch-node.final {
   background: #2b5c38;
   color: white;
-  border: none;
+  border: 1px solid transparent;
 }
 
 .arch-icon {
