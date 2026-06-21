@@ -29,7 +29,7 @@ export default function Dashboard() {
   // Fetch weather data
   const fetchWeather = async () => {
     try {
-      const response = await fetch('http://localhost:3000/api/weather/plot-2');
+      const response = await fetch('/api/weather/plot-2');
       const data = await response.json();
       setWeatherData(data);
       setLoading(false);
@@ -66,7 +66,7 @@ export default function Dashboard() {
         setFlashMessage('🚨 ALERT: 40-Day Drought Threshold Breached!');
         setSimulationStep(3);
         
-        await fetch('http://localhost:3000/api/simulate-trigger', { method: 'POST' });
+        await fetch('/api/simulate-trigger', { method: 'POST' });
         await fetchWeather(); // Force immediate update to red state
         
         setTimeout(() => {
@@ -86,7 +86,7 @@ export default function Dashboard() {
 
   const handleResetSimulation = async () => {
     try {
-      await fetch('http://localhost:3000/api/reset-simulation', { method: 'POST' });
+      await fetch('/api/reset-simulation', { method: 'POST' });
       await fetchWeather();
       setShowUPIModal(false);
       setSimulationStep(0);
