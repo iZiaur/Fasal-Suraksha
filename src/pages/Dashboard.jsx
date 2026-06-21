@@ -319,7 +319,7 @@ export default function Dashboard() {
       </main>
 
       {/* RIGHT SIDEBAR */}
-      <aside className="dashboard-rightbar">
+      <aside className="dashboard-right">
         {/* Live Weather Card */}
         <div className="rightbar-card weather-card">
           <div className="card-header">
