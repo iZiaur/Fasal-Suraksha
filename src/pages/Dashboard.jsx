@@ -156,10 +156,10 @@ export default function Dashboard() {
         </nav>
 
         <div className="sidebar-user">
-          <div className="sidebar-avatar">RP</div>
+          <div className="sidebar-avatar">GA</div>
           <div className="sidebar-user-info">
-            <h4>Ramesh Patel</h4>
-            <p>Barmer, Rajasthan</p>
+            <h4>Gram Admin</h4>
+            <p>Barmer Cooperative</p>
           </div>
         </div>
       </aside>
@@ -171,8 +171,8 @@ export default function Dashboard() {
           <main className="dashboard-main">
             <header className="dashboard-topbar">
           <div className="topbar-greeting">
-            <h1>Namaste, Ramesh Ji 🙏</h1>
-            <p>Here's your farm overview for today — {new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })}</p>
+            <h1>Namaste, Gram Panchayat Admin 🙏</h1>
+            <p>Here's your cooperative overview for today — {new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })}</p>
           </div>
           <div className="topbar-actions">
             {!isCritical && simulationStep === 0 ? (
@@ -418,16 +418,56 @@ export default function Dashboard() {
             </div>
           </header>
           <div style={{ background: 'white', padding: '20px', borderRadius: '15px', marginTop: '20px', boxShadow: '0 4px 6px rgba(0,0,0,0.05)' }}>
-            <h3 style={{ marginBottom: '20px' }}>Registered Locations</h3>
-            <div style={{ display: 'flex', gap: '20px' }}>
-              <div style={{ flex: 1, padding: '15px', border: '1px solid #eee', borderRadius: '10px' }}>
-                <h4>Plot 1 — Jodhpur</h4>
+            <h3 style={{ marginBottom: '20px' }}>Registered Cooperative Locations (Top 10)</h3>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '20px' }}>
+              <div style={{ padding: '15px', border: '1px solid #eee', borderRadius: '10px' }}>
+                <h4>Plot 1 — Jodhpur (Sunil Kumar)</h4>
                 <p style={{ color: '#666', fontSize: '14px', marginTop: '5px' }}>Crop: Wheat <br/>Area: 2 Hectares <br/>Lat/Lon: 26.2389, 73.0243</p>
                 <div style={{ marginTop: '10px', color: '#16a34a', fontWeight: 'bold' }}>Status: Active Monitored</div>
               </div>
-              <div style={{ flex: 1, padding: '15px', border: '1px solid #eee', borderRadius: '10px' }}>
-                <h4>Plot 2 — Barmer</h4>
+              <div style={{ padding: '15px', border: '1px solid #eee', borderRadius: '10px' }}>
+                <h4>Plot 2 — Barmer (Ramesh Patel)</h4>
                 <p style={{ color: '#666', fontSize: '14px', marginTop: '5px' }}>Crop: Bajra <br/>Area: 3 Hectares <br/>Lat/Lon: 25.7500, 71.3900</p>
+                <div style={{ marginTop: '10px', color: '#16a34a', fontWeight: 'bold' }}>Status: Active Monitored</div>
+              </div>
+              <div style={{ padding: '15px', border: '1px solid #eee', borderRadius: '10px' }}>
+                <h4>Plot 3 — Jaisalmer (Anil Sharma)</h4>
+                <p style={{ color: '#666', fontSize: '14px', marginTop: '5px' }}>Crop: Jowar <br/>Area: 5 Hectares <br/>Lat/Lon: 26.9157, 70.9083</p>
+                <div style={{ marginTop: '10px', color: '#16a34a', fontWeight: 'bold' }}>Status: Active Monitored</div>
+              </div>
+              <div style={{ padding: '15px', border: '1px solid #eee', borderRadius: '10px' }}>
+                <h4>Plot 4 — Bikaner (Prakash Singh)</h4>
+                <p style={{ color: '#666', fontSize: '14px', marginTop: '5px' }}>Crop: Wheat <br/>Area: 4 Hectares <br/>Lat/Lon: 28.0229, 73.3119</p>
+                <div style={{ marginTop: '10px', color: '#16a34a', fontWeight: 'bold' }}>Status: Active Monitored</div>
+              </div>
+              <div style={{ padding: '15px', border: '1px solid #eee', borderRadius: '10px' }}>
+                <h4>Plot 5 — Kota (Harish Meena)</h4>
+                <p style={{ color: '#666', fontSize: '14px', marginTop: '5px' }}>Crop: Soybean <br/>Area: 2 Hectares <br/>Lat/Lon: 25.1814, 75.8322</p>
+                <div style={{ marginTop: '10px', color: '#16a34a', fontWeight: 'bold' }}>Status: Active Monitored</div>
+              </div>
+              <div style={{ padding: '15px', border: '1px solid #eee', borderRadius: '10px' }}>
+                <h4>Plot 6 — Jaipur (Vikram Jat)</h4>
+                <p style={{ color: '#666', fontSize: '14px', marginTop: '5px' }}>Crop: Barley <br/>Area: 1.5 Hectares <br/>Lat/Lon: 26.9124, 75.7873</p>
+                <div style={{ marginTop: '10px', color: '#16a34a', fontWeight: 'bold' }}>Status: Active Monitored</div>
+              </div>
+              <div style={{ padding: '15px', border: '1px solid #eee', borderRadius: '10px' }}>
+                <h4>Plot 7 — Pali (Kamal Bishnoi)</h4>
+                <p style={{ color: '#666', fontSize: '14px', marginTop: '5px' }}>Crop: Sesame <br/>Area: 3 Hectares <br/>Lat/Lon: 25.7711, 73.3234</p>
+                <div style={{ marginTop: '10px', color: '#16a34a', fontWeight: 'bold' }}>Status: Active Monitored</div>
+              </div>
+              <div style={{ padding: '15px', border: '1px solid #eee', borderRadius: '10px' }}>
+                <h4>Plot 8 — Ajmer (Suresh C.)</h4>
+                <p style={{ color: '#666', fontSize: '14px', marginTop: '5px' }}>Crop: Maize <br/>Area: 4 Hectares <br/>Lat/Lon: 26.4499, 74.6399</p>
+                <div style={{ marginTop: '10px', color: '#16a34a', fontWeight: 'bold' }}>Status: Active Monitored</div>
+              </div>
+              <div style={{ padding: '15px', border: '1px solid #eee', borderRadius: '10px' }}>
+                <h4>Plot 9 — Alwar (Rajendra)</h4>
+                <p style={{ color: '#666', fontSize: '14px', marginTop: '5px' }}>Crop: Mustard <br/>Area: 2.5 Hectares <br/>Lat/Lon: 27.5530, 76.6346</p>
+                <div style={{ marginTop: '10px', color: '#16a34a', fontWeight: 'bold' }}>Status: Active Monitored</div>
+              </div>
+              <div style={{ padding: '15px', border: '1px solid #eee', borderRadius: '10px' }}>
+                <h4>Plot 10 — Sikar (Om Prakash)</h4>
+                <p style={{ color: '#666', fontSize: '14px', marginTop: '5px' }}>Crop: Gram <br/>Area: 3 Hectares <br/>Lat/Lon: 27.6094, 75.1398</p>
                 <div style={{ marginTop: '10px', color: '#16a34a', fontWeight: 'bold' }}>Status: Active Monitored</div>
               </div>
             </div>
@@ -457,17 +497,73 @@ export default function Dashboard() {
               <tbody>
                 <tr style={{ borderBottom: '1px solid #eee' }}>
                   <td style={{ padding: '15px 10px', fontWeight: 'bold' }}>#FS-2026-901</td>
-                  <td style={{ padding: '15px 10px' }}>Plot 1 — Jodhpur</td>
+                  <td style={{ padding: '15px 10px' }}>Plot 1 — Jodhpur (Sunil K.)</td>
                   <td style={{ padding: '15px 10px' }}>Heatwave Shield</td>
                   <td style={{ padding: '15px 10px' }}>₹99</td>
-                  <td style={{ padding: '15px 10px', color: '#16a34a', fontWeight: 'bold' }}>₹25,000</td>
+                  <td style={{ padding: '15px 10px', color: '#16a34a', fontWeight: 'bold' }}>₹15,000</td>
                 </tr>
-                <tr>
+                <tr style={{ borderBottom: '1px solid #eee' }}>
                   <td style={{ padding: '15px 10px', fontWeight: 'bold' }}>#FS-2026-902</td>
-                  <td style={{ padding: '15px 10px' }}>Plot 2 — Barmer</td>
+                  <td style={{ padding: '15px 10px' }}>Plot 2 — Barmer (Ramesh P.)</td>
                   <td style={{ padding: '15px 10px' }}>Drought Shield</td>
                   <td style={{ padding: '15px 10px' }}>₹149</td>
                   <td style={{ padding: '15px 10px', color: '#16a34a', fontWeight: 'bold' }}>₹25,000</td>
+                </tr>
+                <tr style={{ borderBottom: '1px solid #eee' }}>
+                  <td style={{ padding: '15px 10px', fontWeight: 'bold' }}>#FS-2026-903</td>
+                  <td style={{ padding: '15px 10px' }}>Plot 3 — Jaisalmer (Anil S.)</td>
+                  <td style={{ padding: '15px 10px' }}>Flood Shield</td>
+                  <td style={{ padding: '15px 10px' }}>₹199</td>
+                  <td style={{ padding: '15px 10px', color: '#16a34a', fontWeight: 'bold' }}>₹50,000</td>
+                </tr>
+                <tr style={{ borderBottom: '1px solid #eee' }}>
+                  <td style={{ padding: '15px 10px', fontWeight: 'bold' }}>#FS-2026-904</td>
+                  <td style={{ padding: '15px 10px' }}>Plot 4 — Bikaner (Prakash)</td>
+                  <td style={{ padding: '15px 10px' }}>Drought Shield</td>
+                  <td style={{ padding: '15px 10px' }}>₹120</td>
+                  <td style={{ padding: '15px 10px', color: '#16a34a', fontWeight: 'bold' }}>₹20,000</td>
+                </tr>
+                <tr style={{ borderBottom: '1px solid #eee' }}>
+                  <td style={{ padding: '15px 10px', fontWeight: 'bold' }}>#FS-2026-905</td>
+                  <td style={{ padding: '15px 10px' }}>Plot 5 — Kota (Harish M.)</td>
+                  <td style={{ padding: '15px 10px' }}>Flood Shield</td>
+                  <td style={{ padding: '15px 10px' }}>₹180</td>
+                  <td style={{ padding: '15px 10px', color: '#16a34a', fontWeight: 'bold' }}>₹35,000</td>
+                </tr>
+                <tr style={{ borderBottom: '1px solid #eee' }}>
+                  <td style={{ padding: '15px 10px', fontWeight: 'bold' }}>#FS-2026-906</td>
+                  <td style={{ padding: '15px 10px' }}>Plot 6 — Jaipur (Vikram J.)</td>
+                  <td style={{ padding: '15px 10px' }}>Heatwave Shield</td>
+                  <td style={{ padding: '15px 10px' }}>₹89</td>
+                  <td style={{ padding: '15px 10px', color: '#16a34a', fontWeight: 'bold' }}>₹12,500</td>
+                </tr>
+                <tr style={{ borderBottom: '1px solid #eee' }}>
+                  <td style={{ padding: '15px 10px', fontWeight: 'bold' }}>#FS-2026-907</td>
+                  <td style={{ padding: '15px 10px' }}>Plot 7 — Pali (Kamal B.)</td>
+                  <td style={{ padding: '15px 10px' }}>Drought Shield</td>
+                  <td style={{ padding: '15px 10px' }}>₹110</td>
+                  <td style={{ padding: '15px 10px', color: '#16a34a', fontWeight: 'bold' }}>₹18,000</td>
+                </tr>
+                <tr style={{ borderBottom: '1px solid #eee' }}>
+                  <td style={{ padding: '15px 10px', fontWeight: 'bold' }}>#FS-2026-908</td>
+                  <td style={{ padding: '15px 10px' }}>Plot 8 — Ajmer (Suresh)</td>
+                  <td style={{ padding: '15px 10px' }}>Flood Shield</td>
+                  <td style={{ padding: '15px 10px' }}>₹160</td>
+                  <td style={{ padding: '15px 10px', color: '#16a34a', fontWeight: 'bold' }}>₹40,000</td>
+                </tr>
+                <tr style={{ borderBottom: '1px solid #eee' }}>
+                  <td style={{ padding: '15px 10px', fontWeight: 'bold' }}>#FS-2026-909</td>
+                  <td style={{ padding: '15px 10px' }}>Plot 9 — Alwar (Rajendra)</td>
+                  <td style={{ padding: '15px 10px' }}>Heatwave Shield</td>
+                  <td style={{ padding: '15px 10px' }}>₹79</td>
+                  <td style={{ padding: '15px 10px', color: '#16a34a', fontWeight: 'bold' }}>₹10,000</td>
+                </tr>
+                <tr>
+                  <td style={{ padding: '15px 10px', fontWeight: 'bold' }}>#FS-2026-910</td>
+                  <td style={{ padding: '15px 10px' }}>Plot 10 — Sikar (Om P.)</td>
+                  <td style={{ padding: '15px 10px' }}>Drought Shield</td>
+                  <td style={{ padding: '15px 10px' }}>₹130</td>
+                  <td style={{ padding: '15px 10px', color: '#16a34a', fontWeight: 'bold' }}>₹22,000</td>
                 </tr>
               </tbody>
             </table>
@@ -504,11 +600,39 @@ export default function Dashboard() {
                     <td style={{ padding: '15px 10px' }}><span style={{ background: '#dcfce7', color: '#166534', padding: '4px 8px', borderRadius: '12px', fontSize:'12px', fontWeight:'bold' }}>✓ Paid via UPI</span></td>
                   </tr>
                 )}
-                <tr>
+                <tr style={{ borderBottom: '1px solid #eee' }}>
                   <td style={{ padding: '15px 10px' }}>15 May 2026</td>
-                  <td style={{ padding: '15px 10px', fontWeight: 'bold' }}>Plot 1 — Jodhpur</td>
+                  <td style={{ padding: '15px 10px', fontWeight: 'bold' }}>Plot 1 — Jodhpur (Sunil)</td>
                   <td style={{ padding: '15px 10px' }}>Heatwave &gt;45°C for 7 days</td>
-                  <td style={{ padding: '15px 10px', fontWeight: 'bold', fontSize: '1.1rem' }}>₹5,000</td>
+                  <td style={{ padding: '15px 10px', fontWeight: 'bold', fontSize: '1.1rem' }}>₹15,000</td>
+                  <td style={{ padding: '15px 10px' }}><span style={{ background: '#dcfce7', color: '#166534', padding: '4px 8px', borderRadius: '12px', fontSize:'12px', fontWeight:'bold' }}>✓ Paid via UPI</span></td>
+                </tr>
+                <tr style={{ borderBottom: '1px solid #eee' }}>
+                  <td style={{ padding: '15px 10px' }}>10 Apr 2026</td>
+                  <td style={{ padding: '15px 10px', fontWeight: 'bold' }}>Plot 4 — Bikaner (Prakash)</td>
+                  <td style={{ padding: '15px 10px' }}>Drought &gt;40 days no rain</td>
+                  <td style={{ padding: '15px 10px', fontWeight: 'bold', fontSize: '1.1rem' }}>₹20,000</td>
+                  <td style={{ padding: '15px 10px' }}><span style={{ background: '#dcfce7', color: '#166534', padding: '4px 8px', borderRadius: '12px', fontSize:'12px', fontWeight:'bold' }}>✓ Paid via UPI</span></td>
+                </tr>
+                <tr style={{ borderBottom: '1px solid #eee' }}>
+                  <td style={{ padding: '15px 10px' }}>02 Mar 2026</td>
+                  <td style={{ padding: '15px 10px', fontWeight: 'bold' }}>Plot 5 — Kota (Harish M.)</td>
+                  <td style={{ padding: '15px 10px' }}>Flood &gt;200mm rainfall</td>
+                  <td style={{ padding: '15px 10px', fontWeight: 'bold', fontSize: '1.1rem' }}>₹35,000</td>
+                  <td style={{ padding: '15px 10px' }}><span style={{ background: '#dcfce7', color: '#166534', padding: '4px 8px', borderRadius: '12px', fontSize:'12px', fontWeight:'bold' }}>✓ Paid via UPI</span></td>
+                </tr>
+                <tr style={{ borderBottom: '1px solid #eee' }}>
+                  <td style={{ padding: '15px 10px' }}>18 Feb 2026</td>
+                  <td style={{ padding: '15px 10px', fontWeight: 'bold' }}>Plot 6 — Jaipur (Vikram J.)</td>
+                  <td style={{ padding: '15px 10px' }}>Heatwave &gt;45°C for 7 days</td>
+                  <td style={{ padding: '15px 10px', fontWeight: 'bold', fontSize: '1.1rem' }}>₹12,500</td>
+                  <td style={{ padding: '15px 10px' }}><span style={{ background: '#dcfce7', color: '#166534', padding: '4px 8px', borderRadius: '12px', fontSize:'12px', fontWeight:'bold' }}>✓ Paid via UPI</span></td>
+                </tr>
+                <tr>
+                  <td style={{ padding: '15px 10px' }}>05 Jan 2026</td>
+                  <td style={{ padding: '15px 10px', fontWeight: 'bold' }}>Plot 8 — Ajmer (Suresh)</td>
+                  <td style={{ padding: '15px 10px' }}>Flood &gt;200mm rainfall</td>
+                  <td style={{ padding: '15px 10px', fontWeight: 'bold', fontSize: '1.1rem' }}>₹40,000</td>
                   <td style={{ padding: '15px 10px' }}><span style={{ background: '#dcfce7', color: '#166534', padding: '4px 8px', borderRadius: '12px', fontSize:'12px', fontWeight:'bold' }}>✓ Paid via UPI</span></td>
                 </tr>
               </tbody>

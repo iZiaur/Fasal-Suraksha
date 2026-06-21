@@ -138,16 +138,37 @@ export default function AdminDashboard() {
                   <tbody>
                     <tr>
                       <td>TXN-884920</td>
-                      <td>Ramesh Patel (Plot 2)</td>
+                      <td>Ramesh Patel (Barmer)</td>
                       <td className="text-danger">Drought Protocol Breached</td>
                       <td className="amount">₹25,000</td>
                       <td><span className="badge-verified">✓ Disbursed</span></td>
                     </tr>
                     <tr>
                       <td>TXN-884919</td>
-                      <td>Sunil Kumar (Plot 1)</td>
+                      <td>Sunil Kumar (Jodhpur)</td>
                       <td className="text-danger">Heatwave Protocol Breached</td>
                       <td className="amount">₹15,000</td>
+                      <td><span className="badge-verified">✓ Disbursed</span></td>
+                    </tr>
+                    <tr>
+                      <td>TXN-884917</td>
+                      <td>Prakash Singh (Bikaner)</td>
+                      <td className="text-danger">Drought Protocol Breached</td>
+                      <td className="amount">₹20,000</td>
+                      <td><span className="badge-verified">✓ Disbursed</span></td>
+                    </tr>
+                    <tr>
+                      <td>TXN-884916</td>
+                      <td>Harish Meena (Kota)</td>
+                      <td className="text-danger">Flood Protocol Breached</td>
+                      <td className="amount">₹35,000</td>
+                      <td><span className="badge-verified">✓ Disbursed</span></td>
+                    </tr>
+                    <tr>
+                      <td>TXN-884915</td>
+                      <td>Vikram Jat (Jaipur)</td>
+                      <td className="text-danger">Heatwave Protocol Breached</td>
+                      <td className="amount">₹12,500</td>
                       <td><span className="badge-verified">✓ Disbursed</span></td>
                     </tr>
                   </tbody>
@@ -180,23 +201,86 @@ export default function AdminDashboard() {
                   <tbody>
                     <tr>
                       <td>FS-2026-901</td>
-                      <td>Sunil Kumar</td>
+                      <td>Sunil Kumar (Jodhpur)</td>
                       <td>Heatwave Shield</td>
                       <td className="amount">₹15,000</td>
                       <td><span className="badge-verified">Active</span></td>
                     </tr>
                     <tr>
                       <td>FS-2026-902</td>
-                      <td>Ramesh Patel</td>
+                      <td>Ramesh Patel (Barmer)</td>
                       <td>Drought Shield</td>
                       <td className="amount">₹25,000</td>
                       <td><span className="badge-verified">Active</span></td>
                     </tr>
                     <tr>
                       <td>FS-2026-903</td>
-                      <td>Anil Sharma</td>
+                      <td>Anil Sharma (Jaisalmer)</td>
                       <td>Flood Shield</td>
                       <td className="amount">₹50,000</td>
+                      <td><span className="badge-verified">Active</span></td>
+                    </tr>
+                    <tr>
+                      <td>FS-2026-904</td>
+                      <td>Prakash Singh (Bikaner)</td>
+                      <td>Drought Shield</td>
+                      <td className="amount">₹20,000</td>
+                      <td><span className="badge-verified">Active</span></td>
+                    </tr>
+                    <tr>
+                      <td>FS-2026-905</td>
+                      <td>Harish Meena (Kota)</td>
+                      <td>Flood Shield</td>
+                      <td className="amount">₹35,000</td>
+                      <td><span className="badge-verified">Active</span></td>
+                    </tr>
+                    <tr>
+                      <td>FS-2026-906</td>
+                      <td>Vikram Jat (Jaipur)</td>
+                      <td>Heatwave Shield</td>
+                      <td className="amount">₹12,500</td>
+                      <td><span className="badge-verified">Active</span></td>
+                    </tr>
+                    <tr>
+                      <td>FS-2026-907</td>
+                      <td>Kamal Bishnoi (Pali)</td>
+                      <td>Drought Shield</td>
+                      <td className="amount">₹18,000</td>
+                      <td><span className="badge-verified">Active</span></td>
+                    </tr>
+                    <tr>
+                      <td>FS-2026-908</td>
+                      <td>Suresh Choudhary (Ajmer)</td>
+                      <td>Flood Shield</td>
+                      <td className="amount">₹40,000</td>
+                      <td><span className="badge-verified">Active</span></td>
+                    </tr>
+                    <tr>
+                      <td>FS-2026-909</td>
+                      <td>Rajendra Gurjar (Alwar)</td>
+                      <td>Heatwave Shield</td>
+                      <td className="amount">₹10,000</td>
+                      <td><span className="badge-verified">Active</span></td>
+                    </tr>
+                    <tr>
+                      <td>FS-2026-910</td>
+                      <td>Om Prakash (Sikar)</td>
+                      <td>Drought Shield</td>
+                      <td className="amount">₹22,000</td>
+                      <td><span className="badge-verified">Active</span></td>
+                    </tr>
+                    <tr>
+                      <td>FS-2026-911</td>
+                      <td>Babulal Saini (Tonk)</td>
+                      <td>Flood Shield</td>
+                      <td className="amount">₹30,000</td>
+                      <td><span className="badge-verified">Active</span></td>
+                    </tr>
+                    <tr>
+                      <td>FS-2026-912</td>
+                      <td>Dinesh Bhil (Udaipur)</td>
+                      <td>Drought Shield</td>
+                      <td className="amount">₹15,000</td>
                       <td><span className="badge-verified">Active</span></td>
                     </tr>
                   </tbody>
@@ -229,23 +313,58 @@ export default function AdminDashboard() {
                   <tbody>
                     <tr>
                       <td>TXN-884920</td>
-                      <td>Ramesh Patel (Plot 2)</td>
+                      <td>Ramesh Patel (Barmer)</td>
                       <td className="text-danger">Drought Protocol Breached</td>
                       <td className="amount">₹25,000</td>
                       <td><button className="btn-verify">Verify Details</button></td>
                     </tr>
                     <tr>
                       <td>TXN-884919</td>
-                      <td>Sunil Kumar (Plot 1)</td>
+                      <td>Sunil Kumar (Jodhpur)</td>
                       <td className="text-danger">Heatwave Protocol Breached</td>
                       <td className="amount">₹15,000</td>
                       <td><span className="badge-verified">✓ Verified</span></td>
                     </tr>
                     <tr>
                       <td>TXN-884918</td>
-                      <td>Anil Sharma (Plot 4)</td>
+                      <td>Anil Sharma (Jaisalmer)</td>
+                      <td className="text-danger">Flood Protocol Breached</td>
+                      <td className="amount">₹50,000</td>
+                      <td><span className="badge-verified">✓ Verified</span></td>
+                    </tr>
+                    <tr>
+                      <td>TXN-884917</td>
+                      <td>Prakash Singh (Bikaner)</td>
+                      <td className="text-danger">Drought Protocol Breached</td>
+                      <td className="amount">₹20,000</td>
+                      <td><button className="btn-verify">Verify Details</button></td>
+                    </tr>
+                    <tr>
+                      <td>TXN-884916</td>
+                      <td>Harish Meena (Kota)</td>
+                      <td className="text-danger">Flood Protocol Breached</td>
+                      <td className="amount">₹35,000</td>
+                      <td><span className="badge-verified">✓ Verified</span></td>
+                    </tr>
+                    <tr>
+                      <td>TXN-884915</td>
+                      <td>Vikram Jat (Jaipur)</td>
                       <td className="text-danger">Heatwave Protocol Breached</td>
-                      <td className="amount">₹5,000</td>
+                      <td className="amount">₹12,500</td>
+                      <td><button className="btn-verify">Verify Details</button></td>
+                    </tr>
+                    <tr>
+                      <td>TXN-884914</td>
+                      <td>Kamal Bishnoi (Pali)</td>
+                      <td className="text-danger">Drought Protocol Breached</td>
+                      <td className="amount">₹18,000</td>
+                      <td><span className="badge-verified">✓ Verified</span></td>
+                    </tr>
+                    <tr>
+                      <td>TXN-884913</td>
+                      <td>Suresh Choudhary (Ajmer)</td>
+                      <td className="text-danger">Flood Protocol Breached</td>
+                      <td className="amount">₹40,000</td>
                       <td><span className="badge-verified">✓ Verified</span></td>
                     </tr>
                   </tbody>
