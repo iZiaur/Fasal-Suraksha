@@ -84,7 +84,7 @@ const mapDots = [
    ────────────────────────────────────────── */
 const photos = [
   {
-    src: 'https://images.unsplash.com/photo-1523580494112-071d16940363?auto=format&fit=crop&w=800&q=80',
+    src: '/images/crowd.png',
     alt: 'Large crowd of people',
     caption: 'Farmers Enrolled in Network',
   },
