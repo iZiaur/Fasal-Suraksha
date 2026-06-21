@@ -1,0 +1,287 @@
+/* =========================================
+   Mission Section — Our Mission
+   ========================================= */
+
+.mission {
+  background-color: var(--color-off-white);
+  padding: var(--space-24) 0;
+  overflow: hidden;
+}
+
+.mission__container {
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding: 0 var(--container-padding);
+}
+
+/* --- Section Tag Pill --- */
+.mission__tag {
+  margin-bottom: var(--space-12);
+}
+
+/* --- Main Two-Column Grid --- */
+.mission__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-16);
+  align-items: start;
+}
+
+/* =========================================
+   LEFT COLUMN
+   ========================================= */
+.mission__left {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-10);
+}
+
+/* --- Heading Block --- */
+.mission__heading {
+  font-family: var(--font-heading);
+  font-size: clamp(var(--text-3xl), 3.2vw, var(--text-5xl));
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--color-dark);
+  letter-spacing: -0.01em;
+}
+
+.mission__heading-muted {
+  display: block;
+  margin-top: var(--space-4);
+  color: var(--color-gray);
+  font-weight: 400;
+}
+
+.mission__heading-bold {
+  display: block;
+  margin-top: var(--space-4);
+  font-style: italic;
+  color: var(--color-primary);
+  font-weight: 700;
+}
+
+/* --- Image Gallery (two side-by-side) --- */
+.mission__images {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-4);
+}
+
+.mission__image-wrapper {
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  position: relative;
+  aspect-ratio: 4 / 3;
+}
+
+.mission__image-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s ease;
+}
+
+.mission__image-wrapper:hover img {
+  transform: scale(1.05);
+}
+
+/* =========================================
+   RIGHT COLUMN
+   ========================================= */
+.mission__right {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-10);
+}
+
+/* --- Feature Icons 2x2 Grid --- */
+.mission__features {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-6);
+}
+
+.mission__feature {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-3);
+  text-align: center;
+}
+
+.mission__feature-icon {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  border: 2px solid var(--color-dark);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-white);
+  transition: all var(--transition-base);
+  flex-shrink: 0;
+}
+
+.mission__feature-icon svg {
+  width: 28px;
+  height: 28px;
+  color: var(--color-dark);
+  transition: color var(--transition-base);
+}
+
+.mission__feature:hover .mission__feature-icon {
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(45, 106, 79, 0.25);
+}
+
+.mission__feature:hover .mission__feature-icon svg {
+  color: var(--color-white);
+}
+
+.mission__feature-label {
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--color-dark);
+  letter-spacing: 0.01em;
+}
+
+/* --- Description Paragraph --- */
+.mission__description {
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  line-height: 1.75;
+  color: var(--color-dark-gray);
+}
+
+/* --- Stats Row --- */
+.mission__stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-4);
+  padding-top: var(--space-8);
+  border-top: 1px solid var(--color-light-gray);
+}
+
+.mission__stat {
+  text-align: center;
+}
+
+.mission__stat-value {
+  font-family: var(--font-heading);
+  font-size: clamp(var(--text-2xl), 2.5vw, var(--text-3xl));
+  font-weight: 700;
+  color: var(--color-primary);
+  line-height: 1.2;
+}
+
+.mission__stat-label {
+  font-family: var(--font-body);
+  font-size: var(--text-xs);
+  color: var(--color-gray);
+  font-weight: 500;
+  margin-top: var(--space-1);
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+/* =========================================
+   SCROLL ANIMATIONS
+   Elements start invisible, then animate in
+   when IntersectionObserver adds .is-visible
+   ========================================= */
+.mission__animate {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.mission__animate--left {
+  opacity: 0;
+  transform: translateX(-40px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.mission__animate--right {
+  opacity: 0;
+  transform: translateX(40px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.mission__animate.is-visible,
+.mission__animate--left.is-visible,
+.mission__animate--right.is-visible {
+  opacity: 1;
+  transform: translate(0);
+}
+
+/* Staggered delays for child elements */
+.mission__animate--d1 { transition-delay: 100ms; }
+.mission__animate--d2 { transition-delay: 200ms; }
+.mission__animate--d3 { transition-delay: 300ms; }
+.mission__animate--d4 { transition-delay: 400ms; }
+.mission__animate--d5 { transition-delay: 500ms; }
+.mission__animate--d6 { transition-delay: 600ms; }
+
+/* =========================================
+   RESPONSIVE
+   ========================================= */
+
+/* Tablet */
+@media (max-width: 1024px) {
+  .mission__grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-12);
+  }
+
+  .mission__heading {
+    font-size: clamp(var(--text-2xl), 4vw, var(--text-4xl));
+  }
+
+  .mission__stats {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* Mobile */
+@media (max-width: 640px) {
+  .mission {
+    padding: var(--space-16) 0;
+  }
+
+  .mission__tag {
+    margin-bottom: var(--space-8);
+  }
+
+  .mission__features {
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-4);
+  }
+
+  .mission__feature-icon {
+    width: 52px;
+    height: 52px;
+  }
+
+  .mission__feature-icon svg {
+    width: 22px;
+    height: 22px;
+  }
+
+  .mission__stats {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-6);
+  }
+
+  .mission__images {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-3);
+  }
+
+  .mission__stat-value {
+    font-size: var(--text-2xl);
+  }
+}
