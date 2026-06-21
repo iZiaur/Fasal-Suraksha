@@ -21,6 +21,7 @@ export default function Dashboard() {
   const [weatherData, setWeatherData] = useState(null);
   const [showUPIModal, setShowUPIModal] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [activeTab, setActiveTab] = useState('dashboard');
   
   // Simulation States
   const [flashMessage, setFlashMessage] = useState('');
@@ -124,27 +125,27 @@ export default function Dashboard() {
         </Link>
 
         <nav className="sidebar-nav">
-          <div className="sidebar-nav-item active">
+          <div className={`sidebar-nav-item ${activeTab === 'dashboard' ? 'active' : ''}`} onClick={() => setActiveTab('dashboard')} style={{cursor: 'pointer'}}>
             <span className="nav-icon">📊</span>
             Dashboard
           </div>
-          <div className="sidebar-nav-item">
+          <div className={`sidebar-nav-item ${activeTab === 'farms' ? 'active' : ''}`} onClick={() => setActiveTab('farms')} style={{cursor: 'pointer'}}>
             <span className="nav-icon">🗺️</span>
             My Farms
           </div>
-          <div className="sidebar-nav-item">
+          <div className={`sidebar-nav-item ${activeTab === 'policies' ? 'active' : ''}`} onClick={() => setActiveTab('policies')} style={{cursor: 'pointer'}}>
             <span className="nav-icon">🛡️</span>
             My Policies
           </div>
-          <div className="sidebar-nav-item">
+          <div className={`sidebar-nav-item ${activeTab === 'payouts' ? 'active' : ''}`} onClick={() => setActiveTab('payouts')} style={{cursor: 'pointer'}}>
             <span className="nav-icon">💸</span>
             Payout History
           </div>
-          <div className="sidebar-nav-item">
+          <div className={`sidebar-nav-item ${activeTab === 'alerts' ? 'active' : ''}`} onClick={() => setActiveTab('alerts')} style={{cursor: 'pointer'}}>
             <span className="nav-icon">☁️</span>
             Weather Alerts
           </div>
-          <div className="sidebar-nav-item">
+          <div className={`sidebar-nav-item ${activeTab === 'help' ? 'active' : ''}`} onClick={() => setActiveTab('help')} style={{cursor: 'pointer'}}>
             <span className="nav-icon">❓</span>
             Help
           </div>
@@ -159,9 +160,12 @@ export default function Dashboard() {
         </div>
       </aside>
 
-      {/* MAIN CONTENT */}
-      <main className="dashboard-main">
-        <header className="dashboard-topbar">
+      {/* DYNAMIC CONTENT AREA */}
+      {activeTab === 'dashboard' && (
+        <>
+          {/* MAIN CONTENT */}
+          <main className="dashboard-main">
+            <header className="dashboard-topbar">
           <div className="topbar-greeting">
             <h1>Namaste, Ramesh Ji 🙏</h1>
             <p>Here's your farm overview for today — {new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })}</p>
@@ -383,6 +387,167 @@ export default function Dashboard() {
           </div>
         </div>
       </aside>
+      </>
+      )}
+
+      {activeTab === 'farms' && (
+        <main className="dashboard-main" style={{ flex: 1 }}>
+          <header className="dashboard-topbar">
+            <div className="topbar-greeting">
+              <h1>My Farms 🗺️</h1>
+              <p>Manage your registered plots and GPS coordinates.</p>
+            </div>
+          </header>
+          <div style={{ background: 'white', padding: '20px', borderRadius: '15px', marginTop: '20px', boxShadow: '0 4px 6px rgba(0,0,0,0.05)' }}>
+            <h3 style={{ marginBottom: '20px' }}>Registered Locations</h3>
+            <div style={{ display: 'flex', gap: '20px' }}>
+              <div style={{ flex: 1, padding: '15px', border: '1px solid #eee', borderRadius: '10px' }}>
+                <h4>Plot 1 — Jodhpur</h4>
+                <p style={{ color: '#666', fontSize: '14px', marginTop: '5px' }}>Crop: Wheat <br/>Area: 2 Hectares <br/>Lat/Lon: 26.2389, 73.0243</p>
+                <div style={{ marginTop: '10px', color: '#16a34a', fontWeight: 'bold' }}>Status: Active Monitored</div>
+              </div>
+              <div style={{ flex: 1, padding: '15px', border: '1px solid #eee', borderRadius: '10px' }}>
+                <h4>Plot 2 — Barmer</h4>
+                <p style={{ color: '#666', fontSize: '14px', marginTop: '5px' }}>Crop: Bajra <br/>Area: 3 Hectares <br/>Lat/Lon: 25.7500, 71.3900</p>
+                <div style={{ marginTop: '10px', color: '#16a34a', fontWeight: 'bold' }}>Status: Active Monitored</div>
+              </div>
+            </div>
+          </div>
+        </main>
+      )}
+
+      {activeTab === 'policies' && (
+        <main className="dashboard-main" style={{ flex: 1 }}>
+          <header className="dashboard-topbar">
+            <div className="topbar-greeting">
+              <h1>My Policies 🛡️</h1>
+              <p>Your active parametric insurance covers.</p>
+            </div>
+          </header>
+          <div style={{ background: 'white', padding: '20px', borderRadius: '15px', marginTop: '20px', boxShadow: '0 4px 6px rgba(0,0,0,0.05)' }}>
+            <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left' }}>
+              <thead>
+                <tr style={{ borderBottom: '2px solid #eee' }}>
+                  <th style={{ padding: '10px' }}>Policy ID</th>
+                  <th style={{ padding: '10px' }}>Plot</th>
+                  <th style={{ padding: '10px' }}>Coverage Type</th>
+                  <th style={{ padding: '10px' }}>Premium Paid</th>
+                  <th style={{ padding: '10px' }}>Max Payout</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr style={{ borderBottom: '1px solid #eee' }}>
+                  <td style={{ padding: '15px 10px', fontWeight: 'bold' }}>#FS-2026-901</td>
+                  <td style={{ padding: '15px 10px' }}>Plot 1 — Jodhpur</td>
+                  <td style={{ padding: '15px 10px' }}>Heatwave Shield</td>
+                  <td style={{ padding: '15px 10px' }}>₹99</td>
+                  <td style={{ padding: '15px 10px', color: '#16a34a', fontWeight: 'bold' }}>₹25,000</td>
+                </tr>
+                <tr>
+                  <td style={{ padding: '15px 10px', fontWeight: 'bold' }}>#FS-2026-902</td>
+                  <td style={{ padding: '15px 10px' }}>Plot 2 — Barmer</td>
+                  <td style={{ padding: '15px 10px' }}>Drought Shield</td>
+                  <td style={{ padding: '15px 10px' }}>₹149</td>
+                  <td style={{ padding: '15px 10px', color: '#16a34a', fontWeight: 'bold' }}>₹25,000</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </main>
+      )}
+
+      {activeTab === 'payouts' && (
+        <main className="dashboard-main" style={{ flex: 1 }}>
+          <header className="dashboard-topbar">
+            <div className="topbar-greeting">
+              <h1>Payout History 💸</h1>
+              <p>Record of all automated smart contract settlements.</p>
+            </div>
+          </header>
+          <div style={{ background: 'white', padding: '20px', borderRadius: '15px', marginTop: '20px', boxShadow: '0 4px 6px rgba(0,0,0,0.05)' }}>
+             <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left' }}>
+              <thead>
+                <tr style={{ borderBottom: '2px solid #eee', color: '#666', fontSize: '12px' }}>
+                  <th style={{ padding: '10px' }}>DATE</th>
+                  <th style={{ padding: '10px' }}>FARM</th>
+                  <th style={{ padding: '10px' }}>TRIGGER EVENT</th>
+                  <th style={{ padding: '10px' }}>AMOUNT</th>
+                  <th style={{ padding: '10px' }}>STATUS</th>
+                </tr>
+              </thead>
+              <tbody>
+                {isCritical && (
+                  <tr style={{ borderBottom: '1px solid #eee' }}>
+                    <td style={{ padding: '15px 10px' }}>{new Date().toLocaleDateString('en-GB')}</td>
+                    <td style={{ padding: '15px 10px', fontWeight: 'bold' }}>Plot 2 — Barmer</td>
+                    <td style={{ padding: '15px 10px', color: 'red' }}>Drought &gt;40 days no rain</td>
+                    <td style={{ padding: '15px 10px', fontWeight: 'bold', fontSize: '1.1rem' }}>₹25,000</td>
+                    <td style={{ padding: '15px 10px' }}><span style={{ background: '#dcfce7', color: '#166534', padding: '4px 8px', borderRadius: '12px', fontSize:'12px', fontWeight:'bold' }}>✓ Paid via UPI</span></td>
+                  </tr>
+                )}
+                <tr>
+                  <td style={{ padding: '15px 10px' }}>15 May 2026</td>
+                  <td style={{ padding: '15px 10px', fontWeight: 'bold' }}>Plot 1 — Jodhpur</td>
+                  <td style={{ padding: '15px 10px' }}>Heatwave &gt;45°C for 7 days</td>
+                  <td style={{ padding: '15px 10px', fontWeight: 'bold', fontSize: '1.1rem' }}>₹5,000</td>
+                  <td style={{ padding: '15px 10px' }}><span style={{ background: '#dcfce7', color: '#166534', padding: '4px 8px', borderRadius: '12px', fontSize:'12px', fontWeight:'bold' }}>✓ Paid via UPI</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </main>
+      )}
+
+      {activeTab === 'alerts' && (
+        <main className="dashboard-main" style={{ flex: 1 }}>
+          <header className="dashboard-topbar">
+            <div className="topbar-greeting">
+              <h1>Weather Alerts ☁️</h1>
+              <p>Live satellite monitoring and early warnings for your district.</p>
+            </div>
+          </header>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '15px', marginTop: '20px' }}>
+            {isCritical && (
+               <div style={{ background: '#FEF2F2', border: '1px solid #FECACA', padding: '20px', borderRadius: '10px' }}>
+                 <h3 style={{ color: '#DC2626', display: 'flex', alignItems: 'center', gap: '10px', margin: '0 0 10px 0' }}>🚨 CRITICAL: Severe Drought Detected</h3>
+                 <p style={{ color: '#991B1B', margin: 0 }}>Barmer District has surpassed 40 consecutive days with &lt; 20mm rainfall. Payouts have been authorized for affected plots.</p>
+                 <div style={{ marginTop: '10px', fontSize: '12px', color: '#DC2626', fontWeight: 'bold' }}>{new Date().toLocaleString()}</div>
+               </div>
+            )}
+             <div style={{ background: '#FFFBEB', border: '1px solid #FDE68A', padding: '20px', borderRadius: '10px' }}>
+                 <h3 style={{ color: '#D97706', display: 'flex', alignItems: 'center', gap: '10px', margin: '0 0 10px 0' }}>⚠️ WARNING: Heatwave Approaching</h3>
+                 <p style={{ color: '#B45309', margin: 0 }}>Temperatures in Jodhpur expected to exceed 42°C next week. Ensure adequate irrigation.</p>
+                 <div style={{ marginTop: '10px', fontSize: '12px', color: '#D97706', fontWeight: 'bold' }}>Yesterday, 14:30 PM</div>
+             </div>
+          </div>
+        </main>
+      )}
+
+      {activeTab === 'help' && (
+        <main className="dashboard-main" style={{ flex: 1 }}>
+          <header className="dashboard-topbar">
+            <div className="topbar-greeting">
+              <h1>Support & Help ❓</h1>
+              <p>We are here for you.</p>
+            </div>
+          </header>
+          <div style={{ background: 'white', padding: '30px', borderRadius: '15px', marginTop: '20px', boxShadow: '0 4px 6px rgba(0,0,0,0.05)' }}>
+            <h3>Frequently Asked Questions</h3>
+            <div style={{ marginTop: '20px', borderBottom: '1px solid #eee', paddingBottom: '15px' }}>
+              <h4 style={{ color: '#1B4332' }}>How are payouts triggered?</h4>
+              <p style={{ color: '#666', marginTop: '5px', lineHeight: '1.5' }}>Our smart contracts are directly linked to OpenWeatherMap API and satellite data. When conditions match your policy parameters, funds are automatically sent.</p>
+            </div>
+            <div style={{ marginTop: '20px', borderBottom: '1px solid #eee', paddingBottom: '15px' }}>
+              <h4 style={{ color: '#1B4332' }}>Do I need to file a claim?</h4>
+              <p style={{ color: '#666', marginTop: '5px', lineHeight: '1.5' }}>No. The process is 100% automatic and zero-touch. You will receive an SMS and a UPI credit immediately.</p>
+            </div>
+            <div style={{ marginTop: '20px' }}>
+              <h4 style={{ color: '#1B4332' }}>Contact Kisan Helpline</h4>
+              <p style={{ color: '#666', marginTop: '5px', fontWeight: 'bold' }}>📞 1800-120-XXXX (Toll Free)</p>
+            </div>
+          </div>
+        </main>
+      )}
 
       <UPIPayoutModal 
         isOpen={showUPIModal} 
