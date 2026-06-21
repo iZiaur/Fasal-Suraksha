@@ -145,7 +145,7 @@ const TechStackSection = () => {
           <div className="contract-hash-badge">
             <span className="badge-pulse"></span>
             <span className="hash-label">Live on Polygon Mumbai →</span>
-            <a href="#" className="hash-link">0x4a7f...e2d1 (view tx)</a>
+            <a href="#" className="hash-link">0x4a7f...e2d1</a>
           </div>
         </div>
 
